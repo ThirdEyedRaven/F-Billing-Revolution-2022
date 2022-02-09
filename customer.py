@@ -16,17 +16,19 @@ from tkinter import filedialog
 
 
 
-
-root = Tk()
+root=Tk()
+root.geometry("1500x800")
 root.state("zoomed")
-root.title("F-Billing Revolution 2022 (FREE version) | Company database: fbillingdb | User:Administrator")
+root.title("F-Billing Revolution 2022(FREE version) | Company database:fbillingdb | User:Administrator")
 
-p1 = PhotoImage(file = "images/fbicon.png")
+p1 = PhotoImage(file = 'images/fbicon.png')
 root.iconphoto(False, p1)
 
 s = ttk.Style()
 s.theme_use('default')
 s.configure('TNotebook.Tab', background="#999999", width=20, padding=10)
+
+
 
 invoices= PhotoImage(file="images/invoice.png")
 orders = PhotoImage(file="images/order.png")
@@ -105,7 +107,20 @@ def add_customer():
     a3=Label(Labelframe1,text="Status :")
     a3.place(x=620,y=7)
     b1=Entry(Labelframe1)
-    b2=ttk.Combobox(Labelframe1,values=['Default'])
+    ca=StringVar() 
+    b2=ttk.Combobox(Labelframe1,textvariable = ca )
+
+
+
+    
+      
+    # Adding combobox drop down list 
+    b2['values'] = ('Default') 
+      
+    b2.place(x=390,y=220) 
+    b2.current(0)
+
+
     a1.place(x=10,y=7)
     a2.place(x=330,y=7)
         
@@ -113,7 +128,7 @@ def add_customer():
     b2.place(x=390,y=7,width=220)
 
     checkvar1 = IntVar()
-    chkbtn1 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 1, offvalue = 0)
+    chkbtn1 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 0, offvalue = 1)
     chkbtn1.place(x=670,y=6)
 
     #.............Invoice to Frame............
@@ -185,9 +200,11 @@ def add_customer():
 
     a11=Label(Labelframe6,text="Specific Tax1%:").place(x=150,y=7)
     a12=Label(Labelframe6,text="Discount%:").place(x=10,y=30)
+    
+    b11val = IntVar(Labelframe6, value='0')
 
     b11=Entry(Labelframe6).place(x=250,y=7,width=70)
-    b12=Entry(Labelframe6).place(x=80,y=30,width=70)
+    b12=Entry(Labelframe6,textvariable=b11val).place(x=80,y=30,width=70)
 
         
     #............Customer Type Frame.................
@@ -206,7 +223,32 @@ def add_customer():
     a11=Label(Labelframe8,text="Country:").place(x=10,y=5)
     a12=Label(Labelframe8,text="City:").place(x=10,y=30)
 
-    b11=ttk.Combobox(Labelframe8,value=[""]).place(x=110,y=5,width=210)
+
+
+    
+
+
+
+    c=StringVar() 
+    
+
+    b11=ttk.Combobox(Labelframe8,textvariable=c)
+    b11.place(x=110,y=5,width=210)
+    
+
+
+
+    
+      
+    # Adding combobox drop down list 
+    b11['values'] = ('India','America') 
+      
+    b11.place(x=110,y=5) 
+   
+    
+    
+
+
     b12=Entry(Labelframe8).place(x=110,y=30,width=210)
 
     #.............Note Frame.........................
@@ -251,7 +293,20 @@ def edit_customer():
     a3=Label(Labelframe1,text="Status :")
     a3.place(x=620,y=7)
     b1=Entry(Labelframe1)
-    b2=ttk.Combobox(Labelframe1,values=['Default'])
+    ca=StringVar() 
+    b2=ttk.Combobox(Labelframe1,textvariable = ca )
+
+
+
+    
+      
+    # Adding combobox drop down list 
+    b2['values'] = ('Default') 
+      
+    b2.place(x=390,y=220) 
+    b2.current(0)
+
+
     a1.place(x=10,y=7)
     a2.place(x=330,y=7)
         
@@ -259,8 +314,9 @@ def edit_customer():
     b2.place(x=390,y=7,width=220)
 
     checkvar1 = IntVar()
-    chkbtn1 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 1, offvalue = 0)
+    chkbtn1 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 0, offvalue = 1)
     chkbtn1.place(x=670,y=6)
+
 
     #.............Invoice to Frame............
     Labelframe2=LabelFrame(Labelframe1,text="Invoice to (appears on invoice)")
@@ -331,9 +387,12 @@ def edit_customer():
 
     a11=Label(Labelframe6,text="Specific Tax1%:").place(x=150,y=7)
     a12=Label(Labelframe6,text="Discount%:").place(x=10,y=30)
+    
+    b11val = IntVar(Labelframe6, value='0')
 
     b11=Entry(Labelframe6).place(x=250,y=7,width=70)
-    b12=Entry(Labelframe6).place(x=80,y=30,width=70)
+    b12=Entry(Labelframe6,textvariable=b11val).place(x=80,y=30,width=70)
+
 
         
     #............Customer Type Frame.................
@@ -352,7 +411,26 @@ def edit_customer():
     a11=Label(Labelframe8,text="Country:").place(x=10,y=5)
     a12=Label(Labelframe8,text="City:").place(x=10,y=30)
 
-    b11=ttk.Combobox(Labelframe8,value=[""]).place(x=110,y=5,width=210)
+    c=StringVar() 
+    
+
+    b11=ttk.Combobox(Labelframe8,textvariable=c)
+    b11.place(x=110,y=5,width=210)
+    
+
+
+
+    
+      
+    # Adding combobox drop down list 
+    b11['values'] = ('India','America') 
+      
+    b11.place(x=110,y=5) 
+   
+    
+    
+
+
     b12=Entry(Labelframe8).place(x=110,y=30,width=210)
 
     #.............Note Frame.........................
@@ -383,6 +461,333 @@ def delete_customer():
    
     messagebox.askyesno("Delete Customers", "Are you sure want to delete 1 Customer(s) ?")
 
+
+
+
+#print Invoice
+
+
+def printinvoice():
+
+  def property1():
+    propert=Toplevel()
+
+  
+ 
+    
+    #edit_customer.geometry("775x580+300+100")
+
+    propert.title("Microsoft Print To PDF Advanced Document Settings")
+    p2 = PhotoImage(file = "images/fbicon.png")
+    propert.iconphoto(False, p1)
+    propert.geometry("580x470+380+210")
+
+    def property2():
+      propert1=Toplevel()
+      propert1.title("Microsoft Print To PDF Advanced Document Settings")
+      p2 = PhotoImage(file = "images/fbicon.png")
+      propert1.iconphoto(False, p1)
+      propert1.geometry("580x470+410+220")
+      property1_Frame1=LabelFrame(propert1,height=405, width=560)
+      property1_Frame1.place(x=10, y=10)  
+
+      name=Label(property1_Frame1, text="Microsoft Print To PDF Advanced Document Settings").place(x=10, y=5)
+      paper=Label(property1_Frame1, text="Paper/Output").place(x=30, y=35)
+      size=Label(property1_Frame1, text="Paper size:").place(x=55, y=65)
+      n = StringVar()
+      search = ttk.Combobox(property1_Frame1, width = 28, textvariable = n )
+      search['values'] = ('A4','Letter')
+      search.place(x=150,y=65)
+      search.current(0)
+      copy=Label(property1_Frame1, text="Copy Count:").place(x=55, y=95)
+      nocopy = Spinbox(property1_Frame1,from_=0,to=100000000, width=28).place(x=150, y=95)    
+
+      btn=Button(propert1,text="OK", width=10,).place(x=390, y=425)
+      btn=Button(propert1,text="Cancel", width=10,).place(x=490, y=425)     
+      
+
+
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure('TNotebook.Tab', background="#999999", padding=5)
+    property_Notebook = ttk.Notebook(propert)
+    property_Frame = Frame(property_Notebook, height=450, width=581)
+    property_Notebook.add(property_Frame, text="Layout")
+    property_Notebook.place(x=0, y=0)
+
+    
+
+
+
+
+    property_Frame1=LabelFrame(property_Frame,height=380, width=560)
+    property_Frame1.place(x=10, y=10)   
+
+    name=Label(property_Frame1, text="Orientation:").place(x=10, y=15)
+    n = StringVar()
+    search = ttk.Combobox(property_Frame1, width = 28, textvariable = n )
+    search['values'] = ('Landscape','Portrait')
+    search.place(x=10,y=40)
+    search.current(0)
+
+    text=Text(property_Frame1,width=40).place(x=217, y=20,height=300)
+
+    btn=Button(property_Frame1, text="Advanced...", width=10,command=property2).place(x=430, y=335)
+    btn=Button(property_Frame,text="OK", width=10,).place(x=390, y=400)
+    btn=Button(property_Frame, text="Cancel", width=10,).place(x=490, y=400)     
+
+
+  
+     
+     
+  print1=Toplevel()
+
+  print1.title("Print")
+  p2 = PhotoImage(file = "images/fbicon.png")
+  print1.iconphoto(False, p1)
+      
+
+      
+  print1.geometry("580x390+350+200")
+      
+  printerframe=LabelFrame(print1, text="Printer", height=85, width=563)
+  printerframe.place(x=10, y=5)   
+
+
+
+
+  name=Label(printerframe, text="Name:").place(x=10, y=5)
+  
+  v=StringVar() 
+  
+  e1= ttk.Combobox(printerframe,textvariable=v)
+  
+  
+    # Adding combobox drop down list 
+  e1['values'] = ('OneNote for Windows10','Microsoft XPS Document Writer','Microsoft Print PDF','Fax') 
+      
+  e1.place(x=70,y=5,width=310) 
+  e1.current(0)
+  
+
+   
+    
+
+
+  where=Label(printerframe, text="Where:").place(x=10, y=35)
+  printocheckvar=IntVar()
+  printochkbtn=Checkbutton(printerframe,text="Print to file",variable=printocheckvar,onvalue=1,offvalue=0,height=1,width=10)
+  printochkbtn.place(x=390, y=35)
+  btn=Button(printerframe, text="Properties", width=10,command=property1).place(x=470, y=5)
+
+  pageslblframe=LabelFrame(print1, text="Pages", height=140, width=277)
+  pageslblframe.place(x=10, y=95)
+  radvar=IntVar()
+  radioall=Radiobutton(pageslblframe, text="All", variable=radvar, value="1").place(x=10, y=5)
+  radiocpage=Radiobutton(pageslblframe, text="Current Page", variable=radvar, value="2").place(x=10, y=25)
+  radiopages=Radiobutton(pageslblframe, text="Pages: ", variable=radvar, value="3").place(x=10, y=45)
+  pagecountentry = Entry(pageslblframe, width=30).place(x=80, y=47)
+  pageinfolabl=Label(pageslblframe,text="Enter page numbers and/or page ranges\n      seperated by commas. For example:1,3,5-12")
+  pageinfolabl.place(x=0, y=75)
+
+  copylblframe=LabelFrame(print1, text="Copies", height=140, width=277)
+  copylblframe.place(x=295, y=95)
+  nolabl=Label(copylblframe, text="Number of copies").place(x=5, y=5)      
+  noentry = Spinbox(copylblframe,from_=0,to=100000000, width=18).place(x=140, y=5)      
+  one=Frame(copylblframe, width=30, height=50, bg="black").place(x=20, y=40)     
+  two=Frame(copylblframe, width=30, height=50, bg="grey").place(x=15, y=45)     
+  three=Frame(copylblframe, width=30, height=50, bg="white").place(x=10, y=50)      
+  four=Frame(copylblframe, width=30, height=50, bg="black").place(x=80, y=40)      
+  fiv=Frame(copylblframe, width=30, height=50, bg="grey").place(x=75, y=45)      
+  six=Frame(copylblframe, width=30, height=50, bg="white").place(x=70, y=50)      
+  collatecheckvar=IntVar()
+  collatechkbtn=Checkbutton(copylblframe,text="Collate",variable=collatecheckvar,onvalue=1,offvalue=0,height=1,width=10)
+  collatechkbtn.place(x=120, y=40)
+
+  othrlblframe=LabelFrame(print1, text="Other", height=100, width=277)
+  othrlblframe.place(x=10, y=240)
+  printlb=Label(othrlblframe, text="Print").place(x=5, y=0)
+
+  va=StringVar()  
+  dropprint= ttk.Combobox(othrlblframe,textvariable=va)
+    
+    # Adding combobox drop down list 
+  dropprint['values'] = ('AllPages','Odd Pages','Even Pages')     
+  dropprint.place(x=80,y=0,width=185) 
+  dropprint.current(0)
+
+
+  orderlb=Label(othrlblframe, text="Order").place(x=5, y=25)
+  dropord = ttk.Combobox(othrlblframe, width=28).place(x=80, y=25)
+
+  
+  val=StringVar() 
+  dropord= ttk.Combobox(othrlblframe,textvariable=val)
+  
+  
+    # Adding combobox drop down list 
+  dropord['values'] = ('Direct(1-9)','Reverse(1-9)') 
+      
+  dropord.place(x=80,y=25,width=185) 
+  dropord.current(0)
+
+  duplexlb=Label(othrlblframe, text="Duplex").place(x=5, y=50)
+
+
+  val1=StringVar() 
+  
+  droplex= ttk.Combobox(othrlblframe,textvariable=val1)
+  
+  
+    # Adding combobox drop down list 
+  droplex['values'] = ('Default','Vertical','Horizontal','Simplex') 
+      
+  droplex.place(x=80,y=50,width=185) 
+  droplex.current(0)
+  
+
+  prmodelblframe=LabelFrame(print1, text="Print mode",height=100, width=277)
+  prmodelblframe.place(x=295, y=240)
+
+  
+  val11=StringVar() 
+  
+  dropscal= ttk.Combobox(prmodelblframe,textvariable=val11)
+  
+  
+    # Adding combobox drop down list 
+  dropscal['values'] = ('Default','Split big Pages','Join Small Pages','Scale') 
+      
+  dropscal.place(x=5,y=5,width=260,height=40) 
+  dropscal.current(0)
+  
+  poslb=Label(prmodelblframe, text="Print on sheet").place(x=5, y=50)
+
+  val12=StringVar() 
+  
+  droppos= ttk.Combobox(prmodelblframe,textvariable=val12)
+  
+  
+    # Adding combobox drop down list 
+  droppos['values'] = ('Default') 
+      
+  droppos.place(x=136,y=50,width=129) 
+  droppos.current(0)
+  
+
+  okbtn=Button(print1, text="Ok", width=10).place(x=390, y=350)
+  canbtn=Button(print1, text="Cancel", width=10).place(x=490, y=350)
+
+
+
+
+#Search in Customers
+
+def search_customers():
+    top = Toplevel()  
+    
+    top.title("Find Text")
+    
+ 
+    
+  
+    p2 = PhotoImage(file = "images/fbicon.png")
+    top.iconphoto(False, p1)
+ 
+    
+   
+    
+    top.geometry("520x180+390+250")
+    findwhat1=Label(top,text="Find What:")
+    findwhat1.place(x=5,y=15)
+    n = StringVar() 
+    findwhat = ttk.Combobox(top, width = 50, textvariable = n ) 
+      
+    # Adding combobox drop down list 
+    
+    findwhat.place(x=85,y=15,height=23) 
+    
+
+    findButton = Button(top, text ="Find next",width=10)
+    findButton.place(x=420,y=15)
+
+    findin1=Label(top,text="Find in:")
+    findin1.place(x=5,y=40)
+    n = StringVar() 
+    findIN = ttk.Combobox(top, width = 37, textvariable = n ) 
+      
+    # Adding combobox drop down list 
+    findIN['values'] = ('Customer name',  
+                              'Customer ID', 
+                              'Category', 
+                              'Customer name', 
+                              'Contact Person', 
+                              'Customer Tel.', 
+                              'SMS number',
+                              'Type',
+                              '<<All>>') 
+      
+    findIN.place(x=85,y=40,height=23) 
+    findIN.current(0)
+
+    closeButton = Button(top, text ="Close",width=10)
+    closeButton.place(x=420,y=45)
+
+    match1=Label(top,text="Match:")
+    match1.place(x=5,y=65)
+    n = StringVar() 
+    match = ttk.Combobox(top, width = 27, textvariable = n ) 
+      
+    # Adding combobox drop down list 
+    match['values'] = ('From any part of the field','Whole field',  
+                              'From beging of field')
+      
+    match.place(x=85,y=65,height=23) 
+    match.current(0)
+
+    search1=Label(top,text="Search:")
+    search1.place(x=5,y=90)
+    n = StringVar() 
+    search = ttk.Combobox(top, width = 27, textvariable = n ) 
+      
+    # Adding combobox drop down list 
+    search['values'] = ('Up','Down','All')
+      
+    search.place(x=85,y=90,height=23) 
+    #search.current(0)
+
+
+    checkvarStatus4=IntVar()
+   
+    Button4 = Checkbutton(top,variable = checkvarStatus4, 
+                      text="Match Case", 
+                      onvalue =0 ,
+                      offvalue = 1,
+                      height=3,
+                      width = 15)
+
+    Button4.place(x=60,y=120)
+
+    checkvarStatus5=IntVar()
+   
+    Button5 = Checkbutton(top,variable = checkvarStatus5, 
+                      text="Match Format", 
+                      onvalue =0 ,
+                      offvalue = 1,
+                      height=3,
+                      width = 15)
+
+    Button5.place(x=270,y=120)
+
+
+
+
+
+    top.mainloop()
+
+
+
+
 ######################## FRONT PAGE OF CUSTOMER SECTION #######################################################################
 
     
@@ -397,23 +802,73 @@ pn.pack(side="left", padx=(5, 2))
 pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
 pn.pack(side="left", padx=(0, 5))
 
-productIcon = ImageTk.PhotoImage(Image.open("images/user_add.png"))
-productLabel = Button(midFrame,compound="top", text="Add new\nCustomer",relief=RAISED,  command=add_customer,          image=productIcon, font=("arial", 8),bg="#f5f3f2", fg="black", height=55, bd=1, width=55)
+addcustomerIcon = ImageTk.PhotoImage(Image.open("images/user_add.png"))
+addcustomerLabel = Button(midFrame,compound="top", text="Add new\nCustomer",relief=RAISED,  command=add_customer,          image=addcustomerIcon, font=("arial", 8),bg="#f5f3f2", fg="black", height=55, bd=1, width=55)
 
-productLabel.pack(side="left", pady=3, ipadx=4)
+addcustomerLabel.pack(side="left", pady=3, ipadx=4)
 
-proeditIcon = ImageTk.PhotoImage(Image.open("images/user_edit.png"))
-proeditLabel = Button(midFrame,compound="top", text="Edit/View\nCustomer",relief=RAISED,command=edit_customer, image=proeditIcon,  font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+editcustomerIcon = ImageTk.PhotoImage(Image.open("images/user_edit.png"))
+editcustomerLabel = Button(midFrame,compound="top", text="Edit/View\nCustomer",relief=RAISED,command=edit_customer, image=editcustomerIcon,  font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 
-proeditLabel.pack(side="left")
+editcustomerLabel.pack(side="left")
 
-prodeleteIcon = ImageTk.PhotoImage(Image.open("images/user_delete.png"))
-prodeleteLabel = Button(midFrame,compound="top", text="Delete\nSelected",relief=RAISED, command=delete_customer,image=prodeleteIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+deletecustomerIcon = ImageTk.PhotoImage(Image.open("images/user_delete.png"))
+deletecustomerLabel = Button(midFrame,compound="top", text="Delete\nSelected",relief=RAISED, command=delete_customer,image=deletecustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 
-prodeleteLabel.pack(side="left")
+deletecustomerLabel.pack(side="left")
+
+
 
 pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
 pn.pack(side="left", padx=5)
+
+
+
+previewinvoiceIcon = ImageTk.PhotoImage(Image.open("images/priewok.png"))
+previewinvoiceLabel = Button(midFrame,compound="top", text="Preview\nInvoice List",relief=RAISED,               image=previewinvoiceIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+previewinvoiceLabel.pack(side="left")
+
+printinvoiceIcon = ImageTk.PhotoImage(Image.open("images/printer.png"))
+printinvoiceLabel = Button(midFrame,compound="top", text="Print\n Invoice List",relief=RAISED,  command=printinvoice, image=printinvoiceIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+printinvoiceLabel.pack(side="left")
+
+pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
+pn.pack(side="left", padx=5)
+
+emailinviceIcon = ImageTk.PhotoImage(Image.open("images/gmail.png"))
+emailinviceLabel = Button(midFrame,compound="top", text="E-mail\nInvoice List",relief=RAISED,               image=emailinviceIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+emailinviceLabel.pack(side="left")
+
+smsIcon = ImageTk.PhotoImage(Image.open("images/text-message.png"))
+smsLabel = Button(midFrame,compound="top", text="Send SMS\nNotification",relief=RAISED, image=smsIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+smsLabel.pack(side="left")
+
+pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
+pn.pack(side="left", padx=5)
+
+importcustomerIcon = ImageTk.PhotoImage(Image.open("images/import.png"))
+importcustomerLabel = Button(midFrame,compound="top", text="Export\nCustomers",relief=RAISED, image=importcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+importcustomerLabel.pack(side="left")
+
+exportcustomerIcon = ImageTk.PhotoImage(Image.open("images/export-file.png"))
+exportcustomerLabel = Button(midFrame,compound="top", text="Export\nCustomers",relief=RAISED, image=exportcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+exportcustomerLabel.pack(side="left")
+
+pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
+pn.pack(side="left", padx=5)
+
+
+customersearchIcon = ImageTk.PhotoImage(Image.open("images/search-icon.png"))
+customersearchLabel = Button(midFrame,compound="top",command=search_customers, text="Search in\nCustomers",relief=RAISED,               image=customersearchIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+customersearchLabel.pack(side="left")
+
+pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
+pn.pack(side="left", padx=5)
+
+
+refreshcustomerIcon = ImageTk.PhotoImage(Image.open("images/refresh.png"))
+refreshcustomerLabel = Button(midFrame,compound="top", text="Refresh\ncustomer list",relief=RAISED,               image=refreshcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+refreshcustomerLabel.pack(side="left")
 
 
 
