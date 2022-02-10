@@ -20,16 +20,11 @@ root=Tk()
 root.geometry("1500x800")
 root.state("zoomed")
 root.title("F-Billing Revolution 2022(FREE version) | Company database:fbillingdb | User:Administrator")
-
 p1 = PhotoImage(file = 'images/fbicon.png')
 root.iconphoto(False, p1)
-
 s = ttk.Style()
 s.theme_use('default')
 s.configure('TNotebook.Tab', background="#999999", width=20, padding=10)
-
-
-
 invoices= PhotoImage(file="images/invoice.png")
 orders = PhotoImage(file="images/order.png")
 estimates = PhotoImage(file="images/estimate.png")
@@ -40,12 +35,10 @@ customer = PhotoImage(file="images/customer.png")
 product = PhotoImage(file="images/package.png")
 reports = PhotoImage(file="images/report.png")
 setting = PhotoImage(file="images/setting.png")
-
 tick = PhotoImage(file="images/check.png")
 cancel = PhotoImage(file="images/close.png")
-
+folder = PhotoImage(file="images/folder-black.png")
 tabControl = ttk.Notebook(root)
-
 tab1 = ttk.Frame(tabControl)
 tab2 = ttk.Frame(tabControl)
 tab3=  ttk.Frame(tabControl)
@@ -56,8 +49,6 @@ tab7 = ttk.Frame(tabControl)
 tab8 = ttk.Frame(tabControl)
 tab9 =  ttk.Frame(tabControl)
 tab10=  ttk.Frame(tabControl)
-
-  
 tabControl.add(tab1,image=invoices,compound = LEFT, text ='Invoices',)
 tabControl.add(tab2,image=orders,compound = LEFT, text ='Orders')
 tabControl.add(tab3,image=estimates,compound = LEFT, text ='Estimates')
@@ -68,7 +59,6 @@ tabControl.add(tab7,image=customer,compound = LEFT, text ='Customers')
 tabControl.add(tab8,image=product,compound = LEFT, text ='Product/Services')
 tabControl.add(tab9,image=reports,compound = LEFT, text ='Report')
 tabControl.add(tab10,image=setting,compound = LEFT, text ='Settings')
-
 tabControl.pack(expand = 1, fill ="both")
 
 
@@ -91,36 +81,25 @@ def file_upload():
 
 def add_customer():
     add_customer = Toplevel()  
-    
     add_customer.title("Add new Customer ")
     p2 = PhotoImage(file = "images/fbicon.png")
     add_customer.iconphoto(False, p1)
- 
-    
     add_customer.geometry("775x580+300+100")
-   
     Labelframe1=LabelFrame(add_customer,text="Customer")
     Labelframe1.place(x=10,y=10,width=755,height=525)
-
     a1=Label(Labelframe1,text="Customer ID:",fg="Blue")
     a2=Label(Labelframe1,text="Category:")
     a3=Label(Labelframe1,text="Status :")
     a3.place(x=620,y=7)
     b1=Entry(Labelframe1)
     ca=StringVar() 
-    b2=ttk.Combobox(Labelframe1,textvariable = ca )
-
-
-
-    
+    b2=ttk.Combobox(Labelframe1,textvariable = ca )    
       
     # Adding combobox drop down list 
     b2['values'] = ('Default') 
       
     b2.place(x=390,y=220) 
     b2.current(0)
-
-
     a1.place(x=10,y=7)
     a2.place(x=330,y=7)
         
@@ -223,31 +202,17 @@ def add_customer():
     a11=Label(Labelframe8,text="Country:").place(x=10,y=5)
     a12=Label(Labelframe8,text="City:").place(x=10,y=30)
 
-
-
-    
-
-
-
     c=StringVar() 
     
 
     b11=ttk.Combobox(Labelframe8,textvariable=c)
     b11.place(x=110,y=5,width=210)
     
-
-
-
-    
-      
+   
     # Adding combobox drop down list 
     b11['values'] = ('India','America') 
       
     b11.place(x=110,y=5) 
-   
-    
-    
-
 
     b12=Entry(Labelframe8).place(x=110,y=30,width=210)
 
@@ -266,9 +231,6 @@ def add_customer():
 
     btn1=Button(add_customer,width=50,compound = LEFT,image=tick ,text="  OK").place(x=20, y=545)
     btn2=Button(add_customer,width=80,compound = LEFT,image=cancel,text="  Cancel").place(x=665, y=545)
-
-
-
 
     add_customer.mainloop()
 
@@ -296,10 +258,7 @@ def edit_customer():
     ca=StringVar() 
     b2=ttk.Combobox(Labelframe1,textvariable = ca )
 
-
-
-    
-      
+  
     # Adding combobox drop down list 
     b2['values'] = ('Default') 
       
@@ -418,18 +377,12 @@ def edit_customer():
     b11.place(x=110,y=5,width=210)
     
 
-
-
-    
       
     # Adding combobox drop down list 
     b11['values'] = ('India','America') 
       
     b11.place(x=110,y=5) 
-   
-    
-    
-
+  
 
     b12=Entry(Labelframe8).place(x=110,y=30,width=210)
 
@@ -450,8 +403,6 @@ def edit_customer():
     btn2=Button(edit_customer,width=80,compound = LEFT,image=cancel,text="  Cancel").place(x=665, y=545)
 
 
-
-
     edit_customer.mainloop()
 
 #delete Customer
@@ -460,9 +411,6 @@ def edit_customer():
 def delete_customer():
    
     messagebox.askyesno("Delete Customers", "Are you sure want to delete 1 Customer(s) ?")
-
-
-
 
 #print Invoice
 
@@ -477,14 +425,14 @@ def printinvoice():
     
     #edit_customer.geometry("775x580+300+100")
 
-    propert.title("Microsoft Print To PDF Advanced Document Settings")
+    propert.title("OneNote for Windows 10 Document Properties")
     p2 = PhotoImage(file = "images/fbicon.png")
     propert.iconphoto(False, p1)
     propert.geometry("580x470+380+210")
 
     def property2():
       propert1=Toplevel()
-      propert1.title("Microsoft Print To PDF Advanced Document Settings")
+      propert1.title("Microsoft Print To PDF Advanced Document Options")
       p2 = PhotoImage(file = "images/fbicon.png")
       propert1.iconphoto(False, p1)
       propert1.geometry("580x470+410+220")
@@ -681,6 +629,561 @@ def printinvoice():
 
 
 
+
+
+#EMAIL INVOICE LIST
+
+
+
+      
+def emailinvoice():
+  mailDetail=Toplevel()
+  mailDetail.title("E-Mail Invoice List")
+  p2 = PhotoImage(file = "images/fbicon.png")
+  mailDetail.iconphoto(False, p1)
+  mailDetail.geometry("880x470+380+210")
+ 
+  def my_SMTP():
+      if True:
+          em_ser_conbtn.destroy()
+          mysmtpservercon=LabelFrame(account_Frame,text="SMTP server connection(ask your ISP for your SMTP settings)", height=165, width=380)
+          mysmtpservercon.place(x=610, y=110)
+          lbl_hostn=Label(mysmtpservercon, text="Hostname").place(x=5, y=10)
+          hostnent=Entry(mysmtpservercon, width=30).place(x=80, y=10)
+          lbl_portn=Label(mysmtpservercon, text="Port").place(x=5, y=35)
+          portent=Entry(mysmtpservercon, width=30).place(x=80, y=35)
+          lbl_usn=Label(mysmtpservercon, text="Username").place(x=5, y=60)
+          unament=Entry(mysmtpservercon, width=30).place(x=80, y=60)
+          lbl_pasn=Label(mysmtpservercon, text="Password").place(x=5, y=85)
+          pwdent=Entry(mysmtpservercon, width=30).place(x=80, y=85)
+          ssl_chkvar=IntVar()
+          ssl_chkbtn=Checkbutton(mysmtpservercon, variable=ssl_chkvar, text="This server requires a secure connection(SSL)", onvalue=1, offvalue=0)
+          ssl_chkbtn.place(x=50, y=110)
+          em_ser_conbtn1=Button(account_Frame, text="Test E-mail Server Connection").place(x=610, y=285)
+      else:
+          pass
+    
+  style = ttk.Style()
+  style.theme_use('default')
+  style.configure('TNotebook.Tab', background="#999999", padding=5)
+  email_Notebook = ttk.Notebook(mailDetail)
+  email_Frame = Frame(email_Notebook, height=500, width=1080)
+  account_Frame = Frame(email_Notebook, height=550, width=1080)
+  email_Notebook.add(email_Frame, text="E-mail")
+  email_Notebook.add(account_Frame, text="Account")
+  email_Notebook.place(x=0, y=0)
+
+  messagelbframe=LabelFrame(email_Frame,text="Message", height=500, width=730)
+  messagelbframe.place(x=5, y=5)
+  lbl_emailtoaddr=Label(messagelbframe, text="Email to address").place(x=5, y=5)
+  emailtoent=Entry(messagelbframe, width=50).place(x=120, y=5)
+  sendemail_btn=Button(messagelbframe, text="Send Email", width=10, height=1).place(x=600, y=10)
+  lbl_carcopyto=Label(messagelbframe, text="Carbon copy to").place(x=5, y=32)
+  carcopyent=Entry(messagelbframe, width=50).place(x=120, y=32)
+  stopemail_btn=Button(messagelbframe, text="Stop sending", width=10, height=1).place(x=600, y=40)
+  lbl_subject=Label(messagelbframe, text="Subject").place(x=5, y=59)
+  subent=Entry(messagelbframe, width=50).place(x=120, y=59)
+
+  style = ttk.Style()
+  style.theme_use('default')
+  style.configure('TNotebook.Tab', background="#999999", width=20, padding=5)
+  mess_Notebook = ttk.Notebook(messagelbframe)
+  emailmessage_Frame = Frame(mess_Notebook, height=350, width=710)
+  htmlsourse_Frame = Frame(mess_Notebook, height=350, width=710)
+  mess_Notebook.add(emailmessage_Frame, text="E-mail message")
+  mess_Notebook.add(htmlsourse_Frame, text="Html sourse code")
+  mess_Notebook.place(x=5, y=90)
+
+  btn1=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=0, y=1)
+  btn2=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=36, y=1)
+  btn3=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=73, y=1)
+  btn4=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=105, y=1)
+  btn5=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=140, y=1)
+  btn6=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=175, y=1)
+  btn7=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=210, y=1)
+  btn8=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=245, y=1)
+  btn9=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=280, y=1)
+  btn10=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=315, y=1)
+  btn11=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=350, y=1)
+  btn12=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=385, y=1)
+  btn13=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=420, y=1)
+  btn14=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=455, y=1)
+  dropcomp = ttk.Combobox(emailmessage_Frame, width=8, height=3).place(x=500, y=5)
+  dropcompo = ttk.Combobox(emailmessage_Frame, width=6, height=3).place(x=600, y=5)
+  mframe=Frame(emailmessage_Frame, height=350, width=710, bg="white")
+  mframe.place(x=0, y=28)
+
+  attachlbframe=LabelFrame(email_Frame,text="Attachment(s)", height=350, width=280)
+  attachlbframe.place(x=740, y=5)
+  htcodeframe=Frame(attachlbframe, height=220, width=265, bg="white").place(x=5, y=5)
+  lbl_btn_info=Label(attachlbframe, text="Double click on attachment to view").place(x=30, y=230)
+  btn17=Button(attachlbframe, width=20, text="Add attacment file...").place(x=60, y=260)
+  btn18=Button(attachlbframe, width=20, text="Remove attacment").place(x=60, y=295)
+  lbl_tt_info=Label(email_Frame, text="You can create predefined invoice, order, estimate\nand payment receipt email templates under Main\nmenu/Settings/E-Mail templates tab")
+  lbl_tt_info.place(x=740, y=370)
+
+  ready_frame=Frame(mailDetail, height=20, width=1080, bg="#b3b3b3").place(x=0,y=530)
+  
+  sendatalbframe=LabelFrame(account_Frame,text="E-Mail(Sender data)",height=270, width=600)
+  sendatalbframe.place(x=5, y=5)
+  lbl_sendermail=Label(sendatalbframe, text="Your company email address").place(x=5, y=30)
+  sentent=Entry(sendatalbframe, width=40).place(x=195, y=30)
+  lbl_orcompanyname=Label(sendatalbframe, text="Your name or company name").place(x=5, y=60)
+  nament=Entry(sendatalbframe, width=40).place(x=195, y=60)
+  lbl_reply=Label(sendatalbframe, text="Reply to email address").place(x=5, y=90)
+  replyent=Entry(sendatalbframe, width=40).place(x=195, y=90)
+  lbl_sign=Label(sendatalbframe, text="Signature").place(x=5, y=120)
+  signent=Entry(sendatalbframe,width=50).place(x=100, y=120,height=75)
+  confirm_chkvar=IntVar()
+  confirm_chkbtn=Checkbutton(sendatalbframe, variable=confirm_chkvar, text="Confirmation reading", onvalue=1, offvalue=0)
+  confirm_chkbtn.place(x=200, y=215)
+  btn18=Button(account_Frame, width=15, text="Save settings").place(x=25, y=285)
+
+  sendatalbframe=LabelFrame(account_Frame,text="SMTP Server",height=100, width=380)
+  sendatalbframe.place(x=610, y=5)
+  servar=IntVar()
+  SMTP_rbtn=Radiobutton(sendatalbframe, text="Use the Built-In SMTP Server Settings", variable=servar, value=1)
+  SMTP_rbtn.place(x=10, y=10)
+  MySMTP_rbtn=Radiobutton(sendatalbframe, text="Use My Own SMTP Server Settings(Recommended)", variable=servar, value=2, command=my_SMTP)
+  MySMTP_rbtn.place(x=10, y=40)
+  em_ser_conbtn=Button(account_Frame, text="Test E-mail Server Connection")
+  em_ser_conbtn.place(x=710, y=110)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sms notification order
+  
+def customersms():
+  send_SMS=Toplevel()
+  
+  send_SMS.title("Send SMS notification")
+  p2 = PhotoImage(file = "images/fbicon.png")
+  send_SMS.iconphoto(False, p1)
+  send_SMS.geometry("580x510+380+150")
+
+  style = ttk.Style()
+  style.theme_use('default')
+  style.configure('TNotebook.Tab', background="#999999", padding=5)
+  sms_Notebook = ttk.Notebook(send_SMS)
+  SMS_Notification = Frame(sms_Notebook, height=485, width=585)
+  SMS_Service_Account = Frame(sms_Notebook, height=485, width=585)
+  sms_Notebook.add(SMS_Notification, text="SMS Notification")
+  sms_Notebook.add(SMS_Service_Account, text="SMS Service Account")
+  sms_Notebook.place(x=0, y=0)
+
+  numlbel=Label(SMS_Notification, text="SMS number or comma seperated SMS number list(Please start each SMS number with the country code)")
+  numlbel.place(x=10, y=10)
+  numentry=Entry(SMS_Notification,width=92).place(x=10, y=35,height=25)
+  stexbel=Label(SMS_Notification, text="SMS Text").place(x=10, y=65)
+  stex=Entry(SMS_Notification, width=60).place(x=10, y=90,height=120)
+  no=Label(SMS_Notification, text="0/160 characters")
+  no.place(x=285, y=215)
+  
+  dclbel=Label(SMS_Notification, text="Double click to insert into text")
+  dclbel.place(x=395, y=65)
+  dcl=Entry(SMS_Notification, width=27)
+  dcl.place(x=395, y=90,height=250)
+  
+  smstype=LabelFrame(SMS_Notification, text="SMS message type", width=377, height=60)
+  smstype.place(x=10, y=253)
+  snuvar=IntVar()
+  normal_rbtn=Radiobutton(smstype, text="Normal SMS(160 chars)", variable=snuvar, value=1)
+  normal_rbtn.place(x=5, y=5)
+  unicode_rbtn=Radiobutton(smstype, text="Unicode SMS(70 chars)", variable=snuvar, value=2)
+  unicode_rbtn.place(x=190, y=5)
+  tiplbf=LabelFrame(SMS_Notification, text="Tips", width=680, height=120)
+  tiplbf.place(x=10, y=290)
+  tiplabl=Label(tiplbf,justify=LEFT,fg="red",  text="Always start the SMS nymber with the country code. Do not use the + sign at the beginning(example\nUS number:8455807546). Do not use any special characters in your normal SMS text. Please use the\nstndard SMS characters or the English alphabet and numbers only. Otherwise the SMS will be\nunreadable or undeliverable. If you need to enter international characters, accents,email address, or\nspecial characters to the SMS text field then choose the Unicode SMS format.")
+  tiplabl.place(x=5, y=5)
+
+  btn1=Button(SMS_Notification, width=20, text="Send SMS notification").place(x=10, y=420)
+  btn2=Button(SMS_Notification, width=25, text="Confirm SMS cost before sending").place(x=280, y=420)
+  btn3=Button(SMS_Notification, width=15, text="Cancel").place(x=550, y=420)
+  
+
+  smstype=LabelFrame(SMS_Service_Account, text="Select the notification service provider", width=670, height=65)
+  smstype.place(x=10, y=5)
+  snumvar=IntVar()
+  normal_rbtn=Radiobutton(smstype,text="BULKSMS(www.bulksms.com)",variable=snumvar,value=1,)
+  normal_rbtn.place(x=5, y=5)
+  unicode_rbtn=Radiobutton(smstype, text="Unicode SMS(70 chars)-Recommended", variable=snumvar, value=2)
+  unicode_rbtn.place(x=290, y=5)
+
+  sms1type=LabelFrame(SMS_Service_Account, text="Your BULKSMS.COM Account", width=670, height=100)
+  sms1type.place(x=10, y=80)
+  name=Label(sms1type, text="Username").place(x=10, y=5)
+  na=Entry(sms1type, width=20).place(x=100, y=5)
+  password=Label(sms1type, text="Password").place(x=10, y=45)
+  pas=Entry(sms1type, width=20).place(x=100, y=45)
+  combo=Label(sms1type, text="Route").place(x=400, y=5)
+  n = StringVar()
+  combo1 = ttk.Combobox(sms1type, width = 20, textvariable = n ).place(x=450,y=5)
+  btn1=Button(sms1type, width=10, text="Save settings").place(x=550, y=45)
+
+  
+  tiplbf=LabelFrame(SMS_Service_Account, text="Terms of service", width=680, height=250)
+  tiplbf.place(x=10, y=190)
+  tiplabl=Label(tiplbf,justify=LEFT,fg="red",  text="The SMS notification service is not free.This service costs you creadit.You must have your own account\nat BULKSMS.COM and you need to have sufficient creadit and an active internet connection to use\nthis feature.Please review all fields in this form for accuracy")
+  tiplabl.place(x=0, y=5)
+  tiplabl1=Label(tiplbf,justify=LEFT,fg="black",  text="visit www.bulksms.com website to create your own account.please make sure the BULKSMS .COM\n service works well in your country before you busy creadit")
+  tiplabl1.place(x=0, y=60)
+  tiplabl2=Label(tiplbf,justify=LEFT,fg="black",  text="Our SMS notification tool comes without any warranty.our software only forwards your SMS message\nthe BULKSMS API server .The BULKSMS API server will try to sent SMS message your recipient")
+  tiplabl2.place(x=0, y=100)
+  tiplabl3=Label(tiplbf,justify=LEFT,fg="red",  text="Please note that you access and use the SMS notification tool your own risk.F-Billing software is not\nresponsible for any type of loss or damage or undelivered SMS massage which you may as a result\nof accessing and using the SMS notification service.")
+  tiplabl3.place(x=0, y=140)
+  checkvar1=IntVar()
+  chkbtn1=Checkbutton(tiplbf,text="I have read and agree to the terms of service above",variable=checkvar1,onvalue=1,offvalue=0).place(x=70, y=200)  
+
+
+
+
+
+
+
+
+
+
+#IMPORT CUSTOMERS
+
+def import_customer():
+
+    top=Toplevel()
+   
+    top.title("Import Customers list from Excel(XLS)File")
+    p2 = PhotoImage(file = "images/fbicon.png")
+    top.iconphoto(False, p1)
+    top.geometry("785x540+280+100")
+    importframe=Frame(top)
+    importframe.place(x=0,y=0,height=700,width=785)
+    impolbl=Label(importframe,text="Import source Excel(XLS) File:").place(x=10,y=10)
+    impoentry=Entry(importframe,bg="white")
+    impoentry.place(x=10,y=40,width=400,height=25)
+    previewlbl=Label(importframe,text="Source XLS File preview").place(x=10,y=75)
+   
+    ###### LISTBOX #####################
+    langs = ()
+
+    langs_var = StringVar(value=langs)
+
+    listbox = Listbox(
+        importframe,
+        listvariable=langs_var,
+        width=71,
+        height=8,
+        selectmode='extended')
+
+    listbox.place(x=10,y=102,height=390)
+    
+    # link a scrollbar to a list
+    scrollbar = Scrollbar(
+        importframe,
+        orient='vertical',
+        command=listbox.yview
+    )
+    
+    listbox['yscrollcommand'] = scrollbar.set
+    scrollbar.place(x=422,y=104,height=370)
+
+    scrollbar = Scrollbar(
+        importframe,
+        orient='horizontal',
+        
+        command=listbox.xview
+    )
+    
+    listbox['xscrollcommand'] = scrollbar.set
+    scrollbar.place(x=12,y=474,width=427)
+
+
+
+       
+
+
+    lb1=Label(importframe,text="Select import source XLs file first after build column associations").place(x=10,y=500)
+
+    def callback(url):
+        webbrowser.open_new(url)
+
+    
+    link1 = Label(importframe, text="More info", fg="blue", cursor="hand2")
+    link1.place(x=360,y=500)
+    link1.bind("<Button-1>", lambda e: callback("https://f-billing.com/faq.php"))
+
+  
+        
+        
+     
+      
+    importbutton=Button(top,command=export_customer,image=folder,compound=LEFT)
+    importbutton.place(x=410,y=40,height=25,width=30)
+
+    lb1=Label(importframe,text="     Please associate datafields with data columns").place(x=500,y=10)
+
+    id1=Label(importframe,text="CUSTOMER ID = ",fg="blue")
+    id1.place(x=460,y=40)
+    no = StringVar() 
+    idd = ttk.Combobox(importframe, width = 27, textvariable = no ) 
+      
+    # Adding combobox drop down list 
+    idd['values'] = ('    -NotAssociated-')
+      
+    idd.place(x=580,y=40,height=23) 
+    idd.current(0)
+
+    name1=Label(importframe,text="CUSTOMER NAME = ",fg="blue")
+    name1.place(x=460,y=65)
+    namevar = StringVar() 
+    name = ttk.Combobox(importframe, width = 27, textvariable = namevar ) 
+      
+    # Adding combobox drop down list 
+    name['values'] = ('    -NotAssociated-' 
+                              )
+      
+    name.place(x=580,y=65,height=23) 
+    name.current(0)
+
+
+    category1=Label(importframe,text="CATEGORY = ",fg="blue")
+    category1.place(x=460,y=90)
+    categoryvar = StringVar() 
+    category = ttk.Combobox(importframe, width = 27, textvariable = categoryvar ) 
+      
+    # Adding combobox drop down list 
+    category['values'] = ('    -NotAssociated-' 
+                              )
+      
+    category.place(x=580,y=90,height=23) 
+    category.current(0)
+
+    add=Label(importframe,text="ADDRESS = ",fg="blue")
+    add.place(x=460,y=115)
+    addvar = StringVar() 
+    addc = ttk.Combobox(importframe, width = 27, textvariable = addvar ) 
+      
+    # Adding combobox drop down list 
+    addc['values'] = ('    -NotAssociated-' 
+                              )
+      
+    addc.place(x=580,y=115,height=23) 
+    addc.current(0)
+
+    tel1=Label(importframe,text="TEL.= ")
+    tel1.place(x=460,y=140)
+    telvar = StringVar() 
+    telc = ttk.Combobox(importframe, width = 27, textvariable = telvar ) 
+      
+    # Adding combobox drop down list 
+    telc['values'] = ('    -NotAssociated-' 
+                              )
+      
+    telc.place(x=580,y=140,height=23) 
+    telc.current(0)
+
+    fax1=Label(importframe,text="FAX = ")
+    fax1.place(x=460,y=165)
+    faxvar = StringVar() 
+    faxc = ttk.Combobox(importframe, width = 27, textvariable = faxvar ) 
+      
+    # Adding combobox drop down list 
+    faxc['values'] = ('    -NotAssociated-' 
+                              )
+      
+    faxc.place(x=580,y=165,height=23) 
+    faxc.current(0)
+
+    email1=Label(importframe,text="EMAIL = ")
+    email1.place(x=460,y=190)
+    emailvar = StringVar() 
+    emailc = ttk.Combobox(importframe, width = 27, textvariable = emailvar ) 
+      
+    # Adding combobox drop down list 
+    emailc['values'] = ('    -NotAssociated-'
+                              )
+      
+    emailc.place(x=580,y=190,height=23) 
+    emailc.current(0)
+
+
+    cp1=Label(importframe,text="CONTACT PERSION = ")
+    cp1.place(x=460,y=215)
+    cpvar = StringVar() 
+    cp = ttk.Combobox(importframe, width = 27, textvariable = cpvar ) 
+      
+    # Adding combobox drop down list 
+    cp['values'] = ('    -NotAssociated-' 
+                              )
+      
+    cp.place(x=580,y=215,height=23) 
+    cp.current(0)
+
+    sn2=Label(importframe,text="SHIP TO NAME = ")
+    sn2.place(x=460,y=240)
+    snvar = StringVar() 
+    sn = ttk.Combobox(importframe, width = 27, textvariable = snvar ) 
+      
+    # Adding combobox drop down list 
+    sn['values'] = ('    -NotAssociated-' 
+                              )
+      
+    sn.place(x=580,y=240,height=23) 
+    sn.current(0)
+
+    saa2=Label(importframe,text="SHIP TO ADDESS = ")
+    saa2.place(x=460,y=265)
+    saa2var = StringVar() 
+    saa = ttk.Combobox(importframe, width = 27, textvariable = saa2var ) 
+      
+    # Adding combobox drop down list 
+    saa['values'] = ('    -NotAssociated-')
+      
+    saa.place(x=580,y=265,height=23) 
+    saa.current(0)
+
+
+    stt2=Label(importframe,text="SHIP TO TEL. = ")
+    stt2.place(x=460,y=290)
+    stt2var = StringVar() 
+    stt = ttk.Combobox(importframe, width = 27, textvariable = stt2var ) 
+      
+    # Adding combobox drop down list 
+    stt['values'] = ('    -NotAssociated-' 
+                              )
+      
+    stt.place(x=580,y=290,height=23) 
+    stt.current(0)
+
+
+    stf2=Label(importframe,text="SHIP TO FAX = ")
+    stf2.place(x=460,y=315)
+    stf2var = StringVar() 
+    stf = ttk.Combobox(importframe, width = 27, textvariable = stf2var ) 
+      
+    # Adding combobox drop down list 
+    stf['values'] = ('    -NotAssociated-' 
+                              )
+      
+    stf.place(x=580,y=315,height=23) 
+    stf.current(0)
+
+
+    dd2=Label(importframe,text="DISCOUNT = ")
+    dd2.place(x=460,y=340)
+    dd2var = StringVar() 
+    dd = ttk.Combobox(importframe, width = 27, textvariable = dd2var) 
+      
+    # Adding combobox drop down list 
+    dd['values'] = ('    -NotAssociated-'
+                              )
+      
+    dd.place(x=580,y=340,height=23) 
+    dd.current(0)
+
+    st112=Label(importframe,text="SPECIAL TAX 1 = ")
+    st112.place(x=460,y=365)
+    st112var = StringVar() 
+    st11 = ttk.Combobox(importframe, width = 27, textvariable = st112var ) 
+      
+    # Adding combobox drop down list 
+    st11['values'] = ('    -NotAssociated-' 
+                              )
+      
+    st11.place(x=580,y=365,height=23) 
+    st11.current(0)
+
+    st222=Label(importframe,text="SPECIAL TAX 2 = ")
+    st222.place(x=460,y=390)
+    st222var = StringVar() 
+    st22 = ttk.Combobox(importframe, width = 27, textvariable = st222var ) 
+      
+    # Adding combobox drop down list 
+    st22['values'] = ('    -NotAssociated-'
+                              )
+      
+    st22.place(x=580,y=390,height=23) 
+    st22.current(0)
+
+    vrn2=Label(importframe,text="VAT REG.NUMBER = ")
+    vrn2.place(x=460,y=415)
+    vrn2var = StringVar() 
+    vrn = ttk.Combobox(importframe, width = 27, textvariable = vrn2var ) 
+      
+    # Adding combobox drop down list 
+    vrn['values'] = ('    -NotAssociated-' 
+                              )
+      
+    vrn.place(x=580,y=415,height=23) 
+    vrn.current(0)
+
+    avt2=Label(importframe,text="ACTIVE = ")
+    avt2.place(x=460,y=440)
+    avt2var = StringVar() 
+    avt = ttk.Combobox(importframe, width = 27, textvariable = avt2var ) 
+      
+    # Adding combobox drop down list 
+    avt['values'] = ('    -NotAssociated-'
+                              )
+      
+    avt.place(x=580,y=440,height=23) 
+    avt.current(0)
+
+    tee2=Label(importframe,text="TAX EXEMPTED= ")
+    tee2.place(x=460,y=465)
+    teevar = StringVar() 
+    tee= ttk.Combobox(importframe, width = 27, textvariable = teevar ) 
+      
+    # Adding combobox drop down list 
+    tee['values'] = ('    -NotAssociated-' 
+                              )
+      
+    tee.place(x=580,y=465,height=23) 
+    tee.current(0)
+
+    btn=Button(importframe,text="Clear associations", width=15,).place(x=560, y=500)
+    btn=Button(importframe, text="Next", width=10,).place(x=685, y=500)     
+
+
+
+  
+    
+    top.mainloop()
+
+#export_customer
+
+def export_customer():
+    name = askopenfilename(filetypes=[('CSV', '*.csv',), ('Excel', ('*.xls', '*.xslm', '*.xlsx'))])
+
+    if name:
+        if name.endswith('.csv'):
+            df = pd.read_csv(name)
+        else:
+            df = pd.read_excel(name)
+
+            filename = name
+
+           
+            text.insert('end', str(df.head()) + '\n')
+
+
+
+
+
+
+
+
+
+
 #Search in Customers
 
 def search_customers():
@@ -785,6 +1288,12 @@ def search_customers():
 
     top.mainloop()
 
+#refresh
+def refresh_customers(self):
+  
+    self.destroy()
+    self.__init__()
+ 
 
 
 
@@ -836,22 +1345,22 @@ pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
 pn.pack(side="left", padx=5)
 
 emailinviceIcon = ImageTk.PhotoImage(Image.open("images/gmail.png"))
-emailinviceLabel = Button(midFrame,compound="top", text="E-mail\nInvoice List",relief=RAISED,               image=emailinviceIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+emailinviceLabel = Button(midFrame,compound="top",command=emailinvoice, text="E-mail\nInvoice List",relief=RAISED,               image=emailinviceIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 emailinviceLabel.pack(side="left")
 
 smsIcon = ImageTk.PhotoImage(Image.open("images/text-message.png"))
-smsLabel = Button(midFrame,compound="top", text="Send SMS\nNotification",relief=RAISED, image=smsIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+smsLabel = Button(midFrame,compound="top", text="Send SMS\nNotification",command=customersms, relief=RAISED, image=smsIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 smsLabel.pack(side="left")
 
 pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
 pn.pack(side="left", padx=5)
 
 importcustomerIcon = ImageTk.PhotoImage(Image.open("images/import.png"))
-importcustomerLabel = Button(midFrame,compound="top", text="Export\nCustomers",relief=RAISED, image=importcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+importcustomerLabel = Button(midFrame,compound="top", text="Import\nCustomers",command=import_customer,relief=RAISED, image=importcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 importcustomerLabel.pack(side="left")
 
 exportcustomerIcon = ImageTk.PhotoImage(Image.open("images/export-file.png"))
-exportcustomerLabel = Button(midFrame,compound="top", text="Export\nCustomers",relief=RAISED, image=exportcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+exportcustomerLabel = Button(midFrame,compound="top", text="Export\nCustomers",command=export_customer,relief=RAISED, image=exportcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 exportcustomerLabel.pack(side="left")
 
 pn = Canvas(midFrame, width=1, height=65, bg="#b3b3b3", bd=0)
@@ -867,7 +1376,7 @@ pn.pack(side="left", padx=5)
 
 
 refreshcustomerIcon = ImageTk.PhotoImage(Image.open("images/refresh.png"))
-refreshcustomerLabel = Button(midFrame,compound="top", text="Refresh\ncustomer list",relief=RAISED,               image=refreshcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
+refreshcustomerLabel = Button(midFrame,compound="top", command=refresh_customers,text="Refresh\ncustomer list",relief=RAISED,               image=refreshcustomerIcon, font=("arial", 8),bg="#f8f8f2", fg="black", height=55, bd=1, width=55)
 refreshcustomerLabel.pack(side="left")
 
 
