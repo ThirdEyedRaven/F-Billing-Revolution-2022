@@ -36,7 +36,9 @@ product = PhotoImage(file="images/package.png")
 reports = PhotoImage(file="images/report.png")
 setting = PhotoImage(file="images/setting.png")
 tick = PhotoImage(file="images/check.png")
+warnin = PhotoImage(file="images/sign_warning.png")
 cancel = PhotoImage(file="images/close.png")
+saves = PhotoImage(file="images/save.png")
 folder = PhotoImage(file="images/folder-black.png")
 tabControl = ttk.Notebook(root)
 tab1 = ttk.Frame(tabControl)
@@ -62,6 +64,25 @@ tabControl.add(tab10,image=setting,compound = LEFT, text ='Settings')
 tabControl.pack(expand = 1, fill ="both")
 
 
+
+
+selectall = PhotoImage(file="images/table_select_all.png")
+cut = PhotoImage(file="images/cut.png")
+copy = PhotoImage(file="images/copy.png")
+paste = PhotoImage(file="images/paste.png")
+
+undo = PhotoImage(file="images/undo.png")
+redo = PhotoImage(file="images/redo.png")
+bold = PhotoImage(file="images/bold.png")
+
+italics = PhotoImage(file="images/italics.png")
+underline = PhotoImage(file="images/underline.png")
+left = PhotoImage(file="images/left.png")
+
+right = PhotoImage(file="images/right.png")
+center = PhotoImage(file="images/center.png")
+hyperlink = PhotoImage(file="images/hyperlink.png")
+remove = PhotoImage(file="images/eraser.png")
 
 def file():
     filename = filedialog.askopenfilename(title='open')
@@ -641,7 +662,7 @@ def emailinvoice():
   mailDetail.title("E-Mail Invoice List")
   p2 = PhotoImage(file = "images/fbicon.png")
   mailDetail.iconphoto(False, p1)
-  mailDetail.geometry("880x470+380+210")
+  mailDetail.geometry("1030x550+150+120")
  
   def my_SMTP():
       if True:
@@ -673,7 +694,7 @@ def emailinvoice():
   email_Notebook.add(account_Frame, text="Account")
   email_Notebook.place(x=0, y=0)
 
-  messagelbframe=LabelFrame(email_Frame,text="Message", height=500, width=730)
+  messagelbframe=LabelFrame(email_Frame,text="Message", height=495, width=730)
   messagelbframe.place(x=5, y=5)
   lbl_emailtoaddr=Label(messagelbframe, text="Email to address").place(x=5, y=5)
   emailtoent=Entry(messagelbframe, width=50).place(x=120, y=5)
@@ -694,23 +715,39 @@ def emailinvoice():
   mess_Notebook.add(htmlsourse_Frame, text="Html sourse code")
   mess_Notebook.place(x=5, y=90)
 
-  btn1=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=0, y=1)
-  btn2=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=36, y=1)
-  btn3=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=73, y=1)
-  btn4=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=105, y=1)
-  btn5=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=140, y=1)
-  btn6=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=175, y=1)
-  btn7=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=210, y=1)
-  btn8=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=245, y=1)
-  btn9=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=280, y=1)
-  btn10=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=315, y=1)
-  btn11=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=350, y=1)
-  btn12=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=385, y=1)
-  btn13=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=420, y=1)
-  btn14=Button(emailmessage_Frame,width=4,height=2,compound = LEFT).place(x=455, y=1)
-  dropcomp = ttk.Combobox(emailmessage_Frame, width=8, height=3).place(x=500, y=5)
+  btn1=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=selectall).place(x=0, y=1)
+
+  
+  btn2=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=cut).place(x=36, y=1)
+  btn3=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=copy).place(x=73, y=1)
+  btn4=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=paste).place(x=105, y=1)
+  btn5=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=undo).place(x=140, y=1)
+  btn6=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=redo).place(x=175, y=1)
+  btn7=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=bold).place(x=210, y=1)
+  btn8=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=italics).place(x=245, y=1)
+  btn9=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=underline).place(x=280, y=1)
+  btn10=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=left).place(x=315, y=1)
+  btn11=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=right).place(x=350, y=1)
+  btn12=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=center).place(x=385, y=1)
+  btn13=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=hyperlink).place(x=420, y=1)
+  
+  btn14=Button(emailmessage_Frame,width=31,height=23,compound = LEFT,image=remove).place(x=455, y=1)
+
+
+  dropcomp = ttk.Combobox(emailmessage_Frame, width=12, height=3).place(x=500, y=5)
   dropcompo = ttk.Combobox(emailmessage_Frame, width=6, height=3).place(x=600, y=5)
   mframe=Frame(emailmessage_Frame, height=350, width=710, bg="white")
+  mframe.place(x=0, y=28)
+
+
+
+  btn1=Button(htmlsourse_Frame,width=31,height=23,compound = LEFT,image=selectall).place(x=0, y=1)
+
+  
+  btn2=Button(htmlsourse_Frame,width=31,height=23,compound = LEFT,image=cut).place(x=36, y=1)
+  btn3=Button(htmlsourse_Frame,width=31,height=23,compound = LEFT,image=copy).place(x=73, y=1)
+  btn4=Button(htmlsourse_Frame,width=31,height=23,compound = LEFT,image=paste).place(x=105, y=1)
+  mframe=Frame(htmlsourse_Frame, height=350, width=710, bg="white")
   mframe.place(x=0, y=28)
 
   attachlbframe=LabelFrame(email_Frame,text="Attachment(s)", height=350, width=280)
@@ -771,7 +808,7 @@ def customersms():
   send_SMS.title("Send SMS notification")
   p2 = PhotoImage(file = "images/fbicon.png")
   send_SMS.iconphoto(False, p1)
-  send_SMS.geometry("580x510+380+150")
+  send_SMS.geometry("580x500+380+150")
 
   style = ttk.Style()
   style.theme_use('default')
@@ -789,62 +826,78 @@ def customersms():
   stexbel=Label(SMS_Notification, text="SMS Text").place(x=10, y=65)
   stex=Entry(SMS_Notification, width=60).place(x=10, y=90,height=120)
   no=Label(SMS_Notification, text="0/160 characters")
-  no.place(x=285, y=215)
+  no.place(x=285, y=210)
   
   dclbel=Label(SMS_Notification, text="Double click to insert into text")
   dclbel.place(x=395, y=65)
   dcl=Entry(SMS_Notification, width=27)
-  dcl.place(x=395, y=90,height=250)
+  dcl.place(x=395, y=90,height=200)
   
-  smstype=LabelFrame(SMS_Notification, text="SMS message type", width=377, height=60)
-  smstype.place(x=10, y=253)
+  smstype=LabelFrame(SMS_Notification, text="SMS message type", width=365, height=60)
+  smstype.place(x=10, y=230)
   snuvar=IntVar()
   normal_rbtn=Radiobutton(smstype, text="Normal SMS(160 chars)", variable=snuvar, value=1)
-  normal_rbtn.place(x=5, y=5)
+  normal_rbtn.place(x=15, y=5)
   unicode_rbtn=Radiobutton(smstype, text="Unicode SMS(70 chars)", variable=snuvar, value=2)
-  unicode_rbtn.place(x=190, y=5)
-  tiplbf=LabelFrame(SMS_Notification, text="Tips", width=680, height=120)
-  tiplbf.place(x=10, y=290)
-  tiplabl=Label(tiplbf,justify=LEFT,fg="red",  text="Always start the SMS nymber with the country code. Do not use the + sign at the beginning(example\nUS number:8455807546). Do not use any special characters in your normal SMS text. Please use the\nstndard SMS characters or the English alphabet and numbers only. Otherwise the SMS will be\nunreadable or undeliverable. If you need to enter international characters, accents,email address, or\nspecial characters to the SMS text field then choose the Unicode SMS format.")
+  unicode_rbtn.place(x=195, y=5)
+  tiplbf=LabelFrame(SMS_Notification, text="Tips", width=552, height=120)
+  tiplbf.place(x=10, y=292)
+  tiplabl=Label(tiplbf,justify=LEFT,fg="red",  text="Always start the SMS number with the country code. Do not use the + sign at the beginning(example\nUS number: 8455807546). Do not use any special characters in your normal SMS text. Please use the\nstndard SMS characters or the English alphabet and numbers only. Otherwise the SMS will be\nunreadable or undeliverable. If you need to enter international characters, accents,email address, or\nspecial characters to the SMS text field then choose the Unicode SMS format.")
   tiplabl.place(x=5, y=5)
 
-  btn1=Button(SMS_Notification, width=20, text="Send SMS notification").place(x=10, y=420)
-  btn2=Button(SMS_Notification, width=25, text="Confirm SMS cost before sending").place(x=280, y=420)
-  btn3=Button(SMS_Notification, width=15, text="Cancel").place(x=550, y=420)
+
+  btn1=Button(SMS_Notification,width=150,compound = LEFT,image=tick ,text="  Send SMS notification").place(x=10, y=425,height=31)
+  btn2=Button(SMS_Notification,width=215,compound = LEFT,image=warnin,text="  Confirm SMS cost before sending").place(x=190, y=425,height=31)
+  btn3=Button(SMS_Notification,width=80,compound = LEFT,image=cancel,text="  Cancel").place(x=472, y=425,height=31)
+
+
   
 
-  smstype=LabelFrame(SMS_Service_Account, text="Select the notification service provider", width=670, height=65)
+
+  smstype=LabelFrame(SMS_Service_Account, text="Select the notification service provider", width=555, height=65)
   smstype.place(x=10, y=5)
   snumvar=IntVar()
   normal_rbtn=Radiobutton(smstype,text="BULKSMS(www.bulksms.com)",variable=snumvar,value=1,)
   normal_rbtn.place(x=5, y=5)
-  unicode_rbtn=Radiobutton(smstype, text="Unicode SMS(70 chars)-Recommended", variable=snumvar, value=2)
-  unicode_rbtn.place(x=290, y=5)
+  unicode_rbtn=Radiobutton(smstype, text="EXPERTTEXTING(www.experttexting.com-Recommended", variable=snumvar, value=2)
+  unicode_rbtn.place(x=210, y=5)
 
-  sms1type=LabelFrame(SMS_Service_Account, text="Your BULKSMS.COM Account", width=670, height=100)
+  sms1type=LabelFrame(SMS_Service_Account, text="Your BULKSMS.COM Account", width=555, height=100)
   sms1type.place(x=10, y=80)
   name=Label(sms1type, text="Username").place(x=10, y=5)
-  na=Entry(sms1type, width=20).place(x=100, y=5)
+  na=Entry(sms1type,width=29).place(x=100, y=5,height=23)
   password=Label(sms1type, text="Password").place(x=10, y=45)
-  pas=Entry(sms1type, width=20).place(x=100, y=45)
-  combo=Label(sms1type, text="Route").place(x=400, y=5)
+  pas=Entry(sms1type, width=29).place(x=100, y=45,height=23)
+
+
+
+  combo=Label(sms1type,text="Route").place(x=320, y=5)
   n = StringVar()
-  combo1 = ttk.Combobox(sms1type, width = 20, textvariable = n ).place(x=450,y=5)
-  btn1=Button(sms1type, width=10, text="Save settings").place(x=550, y=45)
+  combo1 = ttk.Combobox(sms1type,textvariable = n )
+
+  combo1['values'] = ('1-Economy (test first)','2-Standard (default)','3-Premium') 
+  combo1.place(x=375,y=5,height=23,width=165)  
+  
+  combo1.current(0)
+  
+
+  btn1=Button(sms1type,width=110,compound = LEFT,image=saves,text="  Save settings").place(x=420, y=35,height=31)
+
+
 
   
-  tiplbf=LabelFrame(SMS_Service_Account, text="Terms of service", width=680, height=250)
+  tiplbf=LabelFrame(SMS_Service_Account, text="Terms of service", width=555, height=250)
   tiplbf.place(x=10, y=190)
   tiplabl=Label(tiplbf,justify=LEFT,fg="red",  text="The SMS notification service is not free.This service costs you creadit.You must have your own account\nat BULKSMS.COM and you need to have sufficient creadit and an active internet connection to use\nthis feature.Please review all fields in this form for accuracy")
-  tiplabl.place(x=0, y=5)
+  tiplabl.place(x=2, y=5)
   tiplabl1=Label(tiplbf,justify=LEFT,fg="black",  text="visit www.bulksms.com website to create your own account.please make sure the BULKSMS .COM\n service works well in your country before you busy creadit")
-  tiplabl1.place(x=0, y=60)
+  tiplabl1.place(x=2, y=60)
   tiplabl2=Label(tiplbf,justify=LEFT,fg="black",  text="Our SMS notification tool comes without any warranty.our software only forwards your SMS message\nthe BULKSMS API server .The BULKSMS API server will try to sent SMS message your recipient")
-  tiplabl2.place(x=0, y=100)
+  tiplabl2.place(x=2, y=100)
   tiplabl3=Label(tiplbf,justify=LEFT,fg="red",  text="Please note that you access and use the SMS notification tool your own risk.F-Billing software is not\nresponsible for any type of loss or damage or undelivered SMS massage which you may as a result\nof accessing and using the SMS notification service.")
-  tiplabl3.place(x=0, y=140)
+  tiplabl3.place(x=2, y=140)
   checkvar1=IntVar()
-  chkbtn1=Checkbutton(tiplbf,text="I have read and agree to the terms of service above",variable=checkvar1,onvalue=1,offvalue=0).place(x=70, y=200)  
+  chkbtn1=Checkbutton(tiplbf,text="I have read and agree to the terms of service above",variable=checkvar1,onvalue=1,offvalue=0).place(x=130, y=200)  
 
 
 
@@ -871,6 +924,8 @@ def import_customer():
     impoentry=Entry(importframe,bg="white")
     impoentry.place(x=10,y=40,width=400,height=25)
     previewlbl=Label(importframe,text="Source XLS File preview").place(x=10,y=75)
+
+    
    
     ###### LISTBOX #####################
     langs = ()
@@ -1162,7 +1217,7 @@ def import_customer():
 #export_customer
 
 def export_customer():
-    name = askopenfilename(filetypes=[('CSV', '*.csv',), ('Excel', ('*.xls', '*.xslm', '*.xlsx'))])
+    name = askopenfilename(filetypes=[('Excel', ('*.xls', '*.xslm', '*.xlsx')),('CSV', '*.csv',)])
 
     if name:
         if name.endswith('.csv'):
@@ -1173,7 +1228,7 @@ def export_customer():
             filename = name
 
            
-            text.insert('end', str(df.head()) + '\n')
+            
 
 
 
