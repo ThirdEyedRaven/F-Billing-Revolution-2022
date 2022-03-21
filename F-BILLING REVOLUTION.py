@@ -1513,6 +1513,16 @@ def reg_1():# Storing values into db (user)contp,cemail,ctel,cfax,cmob,scontp,sc
   val=(customerid,businessname,businessaddress,category,status,shipname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,country,city,notes,discount,specifictax1)
   fbcursor.execute(sql,val)
   fbilldb.commit()
+  for record in customertree.get_children():
+    customertree.delete(record)
+  count=0
+  fbcursor.execute('SELECT * FROM Customer;')
+  for i in fbcursor:
+      if True:
+          customertree.insert(parent='', index='end', iid=i, text='hello', values=('', i[0], i[2], i[4], i[8], i[10], i[12], i[22]))
+      else:
+          pass
+  count += 1
   messagebox.showinfo('Registration successfull','Registration successfull')
 
 
@@ -1533,35 +1543,35 @@ def edit_customer():
     psdata = fbcursor.fetchone()
 
 
-    # def update_expenses():# Storing values into db (user)
-    #   global img , filename 
-    #   itemid = tree.item(tree.focus())["values"][1]
-    #   customerid = b1.get()
-    #   category = ca.get_date()
-    #   businessname = b5.get()
-    #   address = b2.get()
-    #   shiptoname = b11.get()
-    #   shipaddress = a23.get()
-    #   contactperson = a11.get()
-    #   cpemail = a21.get()
-    #   cptelno = a31.get() 
-    #   cpfax = a41.get('1.0', 'end-1c')
-    #   cpmobileforsms = a51.get()
-    #   shipcontactperson = b13.get()
-    #   shipcpemail = a22.get()
-    #   shipcptelno = a31.get()
-    #   shipcpfax = a41.get()
-    #   taxexempt = checkvar1.get()
-    #   specifictax1 = a13.get()
-    #   discount = a12.get()
-    #   country = c.get()
-    #   city = a14.get()
-    #   sql='UPDATE Customer set itemid=%s,date=%s,customerid=%s,category=%s,businessname=%s,address=%s,shiptoname=%s,customer=%s,shipaddress=%s,contactperson=%s,cpemail=%s,cptelno=%s,cpfax=%s,cpmobileforsms=%s,shipcontactperson=%s,shipcpemail=%s,shipcptelno=%s,shipcpfax=%s,taxexempt=%s,specifictax1=%s,discount=%s,country=%s,city=%s,itemid=%s where customerid=%s'
-    #   val=(itemid,date,customerid,category,businessname,address,shiptoname,customer,shipaddress,contactperson,
-    #   cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city,itemid)
-    #   fbcursor.execute(sql,val)
-    #   fbilldb.commit()
-    #   messagebox.showinfo('Update Successfull','Update Successfull')
+    def update_customer():# Storing values into db (user) 
+      itemid = customertree.item(customertree.focus())["values"][0]
+      customerid = b1.get()
+      category = ca.get()
+      businessname = b5.get()
+      address = b14.get()
+      shiptoname = b15.get()
+      shipaddress = a23.get()
+      contactperson = cs.get()
+      cpemail = ct.get()
+      cptelno = a61.get() 
+      cpfax = a71.get()
+      cpmobileforsms = a51.get()
+      shipcontactperson = b13.get()
+      shipcpemail = a22.get()
+      shipcptelno = a31.get()
+      shipcpfax = a41.get()
+      taxexempt = checkvar1.get()
+      specifictax1 = a13.get()
+      discount = a12.get()
+      country = c.get()
+      city = a14.get()
+      print ("hello")
+      print (customerid,category,businessname,address,shiptoname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city)
+      sql='UPDATE Customer set category=%s,businessname=%s,address=%s,shiptoname=%s,customer=%s,shipaddress=%s,contactperson=%s,cpemail=%s,cptelno=%s,cpfax=%s,cpmobileforsms=%s,shipcontactperson=%s,shipcpemail=%s,shipcptelno=%s,shipcpfax=%s,taxexempt=%s,specifictax1=%s,discount=%s,country=%s,city=%s where customerid=%s'
+      val=(category,businessname,address,shiptoname,customer,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city,itemid)
+      fbcursor.execute(sql,val,)
+      fbilldb.commit()
+      # messagebox.showinfo('Update Successfull','Update Successfull')
   
 
 
@@ -1606,19 +1616,19 @@ def edit_customer():
     b5.place(x=110,y=10,width=210)
     b5.delete(0,'end')
     b5.insert(0, psdata[4])
-    b2=Entry(Labelframe2)
-    b2.place(x=110,y=35,width=210,height=63)
-    b2.delete(0,'end')
-    b2.insert(0, psdata[5])  
+    b14=Entry(Labelframe2)
+    b14.place(x=110,y=35,width=210,height=63)
+    b14.delete(0,'end')
+    b14.insert(0, psdata[5])  
     btn110=Button(Labelframe1,width=3,height=2,compound = LEFT,text=">>").place(x=359,y=85,height=20)
     Labelframe3=LabelFrame(Labelframe1,text="Ship to (appears on invoice)")
     Labelframe3.place(x=400,y=35,width=340,height=125)
     a11=Label(Labelframe3,text="Ship to Name:").place(x=10,y=10)
     a21=Label(Labelframe3,text="Address:").place(x=10,y=35)
-    b11=Entry(Labelframe3)
-    b11.place(x=110,y=10,width=210)
-    b11.delete(0,'end')
-    b11.insert(0, psdata[6])
+    b15=Entry(Labelframe3)
+    b15.place(x=110,y=10,width=210)
+    b15.delete(0,'end')
+    b15.insert(0, psdata[6])
     a23=Entry(Labelframe3)
     a23.place(x=110,y=35,width=210,height=63)
     a23.delete(0,'end')
@@ -1630,22 +1640,24 @@ def edit_customer():
     a31=Label(Labelframe4,text="Tel. No:").place(x=10,y=60)
     a41=Label(Labelframe4,text="Fax:").place(x=200,y=60)
     a51=Label(Labelframe4,text="Mobile number for SMS notification:").place(x=10,y=85)
-    a11=Entry(Labelframe4)
+    cs=StringVar()
+    a11=Entry(Labelframe4, textvariable=cs)
     a11.place(x=110,y=10,width=210)
     a11.delete(0,'end')
     a11.insert(0, psdata[8])
-    a21=Entry(Labelframe4)
-    a21.place(x=110,y=35,width=210)
+    ct=StringVar()
+    a21=Entry(Labelframe4, textvariable=ct)
+    a21.place(x=110,y=35,width=210)  
     a21.delete(0,'end')
     a21.insert(0, psdata[9])
-    a31=Entry(Labelframe4)
-    a31.place(x=110,y=60,width=90)
-    a31.delete(0,'end')
-    a31.insert(0, psdata[10])
-    a41=Entry(Labelframe4)
-    a41.place(x=230,y=60,width=90)
-    a41.delete(0,'end')
-    a41.insert(0, psdata[11])
+    a61=Entry(Labelframe4)
+    a61.place(x=110,y=60,width=90)
+    a61.delete(0,'end')
+    a61.insert(0, psdata[10])
+    a71=Entry(Labelframe4)
+    a71.place(x=230,y=60,width=90)
+    a71.delete(0,'end')
+    a71.insert(0, psdata[11])
     a51=Entry(Labelframe4)
     a51.place(x=215,y=85,width=105)
     a51.delete(0,'end')
@@ -1679,13 +1691,13 @@ def edit_customer():
     chkbtn1 = Checkbutton(Labelframe6, text = "Tax Exempt", variable = checkvar1, onvalue = 1, offvalue = 0, font=("arial", 8))
     chkbtn1.place(x=10,y=6)
     a11=Label(Labelframe6,text="Specific Tax1%:").place(x=150,y=7)
-    a12=Label(Labelframe6,text="Discount%:").place(x=10,y=30)
+    a3label=Label(Labelframe6,text="Discount%:").place(x=10,y=30)
     b11val = IntVar(Labelframe6)
     a13=Entry(Labelframe6)
     a13.place(x=250,y=7,width=70)
     a13.delete(0,'end')
     a13.insert(0, psdata[18])
-    a12=Entry(Labelframe6,textvariable=b11val)
+    a12=Entry(Labelframe6)
     a12.place(x=80,y=30,width=70)
     a12.delete(0,'end')
     a12.insert(0, psdata[19])
@@ -1697,8 +1709,8 @@ def edit_customer():
     r3=Radiobutton(Labelframe7, text = "Both(Client/Vender)", variable = i, value = 3).place(x=180,y=15)
     Labelframe8=LabelFrame(Labelframe1,text="Additional Info")
     Labelframe8.place(x=400,y=288,width=340,height=80)
-    a11=Label(Labelframe8,text="Country:").place(x=10,y=5)
-    a12=Label(Labelframe8,text="City:").place(x=10,y=30)
+    a2label=Label(Labelframe8,text="Country:").place(x=10,y=5)
+    a1label=Label(Labelframe8,text="City:").place(x=10,y=30)
     c=StringVar() 
     b11=ttk.Combobox(Labelframe8,textvariable=c)
     b11.place(x=110,y=5,width=210)
@@ -1717,7 +1729,7 @@ def edit_customer():
     b12=Entry(Labelframe9).place(x=20,y=10,width=295,height=70)
     scrollbar = Scrollbar(Labelframe9)
     scrollbar.place(x=295,y=10)
-    btn1=Button(edit_customer,width=50,compound = LEFT,image=tick ,text="  OK").place(x=20, y=545)
+    btn1=Button(edit_customer,width=50,compound = LEFT,image=tick ,text="  OK",command=update_customer).place(x=20, y=545)
     btn2=Button(edit_customer,width=80,compound = LEFT,image=cancel,text="  Cancel").place(x=665, y=545)
 
   except:
@@ -2342,9 +2354,26 @@ def export_customer():
             
 
 
+
+def search_customer():
+  query = searchvar.get()
+  selections = []
+  for child in customertree.get_children():
+      if query in customertree.item(child)['values']:
+          print(customertree.item(child)['values'])
+          selections.append(child)
+  customertree.selection_set(selections)
+
+
+
+
+
+
+
 #Search in Customers
 
 def search_customers():
+    global searchvar 
     top = Toplevel()  
     top.title("Find Text")
     p2 = PhotoImage(file = "images/fbicon.png")
@@ -2352,10 +2381,10 @@ def search_customers():
     top.geometry("520x180+390+250")
     findwhat1=Label(top,text="Find What:")
     findwhat1.place(x=5,y=15)
-    n = StringVar() 
-    findwhat = ttk.Combobox(top, width = 50, textvariable = n )
+    searchvar = StringVar() 
+    findwhat = ttk.Combobox(top, width = 50, textvariable = searchvar )
     findwhat.place(x=85,y=15,height=23) 
-    findButton = Button(top, text ="Find next",width=10)
+    findButton = Button(top, text ="Find next",command=search_customer,width=10)
     findButton.place(x=420,y=15)
     findin1=Label(top,text="Find in:")
     findin1.place(x=5,y=40)
@@ -2410,9 +2439,22 @@ def search_customers():
 
 #refresh
 
-def refresh_customers(self):
-    self.destroy()
-    self.__init__()
+def refresh_customers():
+  for record in customertree.get_children():
+    customertree.delete(record)
+  count=0
+  fbcursor.execute('SELECT * FROM Customer;')
+  for i in fbcursor:
+      if True:
+          customertree.insert(parent='', index='end', iid=i, text='hello', values=('', i[0], i[2], i[4], i[8], i[10], i[12], i[22]))
+      else:
+          pass
+  count += 1
+
+    
+
+
+    
  
 
 
@@ -5291,14 +5333,32 @@ def dele():
 
 
 
+# def search_records():
+#   query = searchvar.get()
+#   selections = []
+#   for child in customertree.get_children():
+#       if query in customertree.item(child)['values']:
+#           print(customertree.item(child)['values'])
+#           selections.append(child)
+#   tree.selection_set(selections)
+
+
+
+
+
+
+
+
+
 #search in orders  
-def search():  
+def search():
+    global searchvar  
     top = Toplevel()     
     top.title("Find Text")   
     top.geometry("600x250+390+250")
     findwhat1=Label(top,text="Find What:",pady=5,padx=10).place(x=5,y=20)
-    n = StringVar()
-    findwhat = ttk.Combobox(top, width = 40, textvariable = n ).place(x=90,y=25)
+    searchvar = StringVar()
+    findwhat = ttk.Combobox(top, width = 40, textvariable = searchvar ).place(x=90,y=25)
    
     findin1=Label(top,text="Find in:",pady=5,padx=10).place(x=5,y=47)
     n = StringVar()
@@ -5307,7 +5367,7 @@ def search():
     findIN.place(x=90,y=54)
     findIN.current(0)
 
-    findButton = Button(top, text ="Find next",width=10).place(x=480,y=22)
+    findButton = Button(top, text ="Find next", command=search_records, width=10).place(x=480,y=22)
     closeButton = Button(top,text ="Close",width=10).place(x=480,y=52)
     
     match1=Label(top,text="Match:",pady=5,padx=10).place(x=5,y=74)
