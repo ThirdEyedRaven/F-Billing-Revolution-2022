@@ -20,6 +20,7 @@ import subprocess
 import mysql.connector
 import io
 from models import *
+import csv
 
 
 
@@ -1373,13 +1374,13 @@ myapp = MyApp(tab3)
 #add new customer
 
 def add_customer():
-      global cuid, ca, bname, address, spname, spaddress, cprsn, cemail, ctno, cfax, cnsms, sprsn, semail, stno, sfax, b11val, disnt, cntry, cty, nts, checkvar1, checkvar2
+      global cuid, ca, bname, address, spname, spaddress, cprsn, cemail, ctno, cfax, cnsms, sprsn, semail, stno, sfax, b11val, disnt, cntry, cty, radio, nts, checkvar1, checkvar2
       ven=Toplevel(midFrame)
       ven.title("Add new vendor")
       ven.geometry("930x650+240+10")
       checkvar1=IntVar()
       checkvar2=IntVar()
-      radio=IntVar()
+     
       createFrame=Frame(ven, bg="#f5f3f2", height=650)
       createFrame.pack(side="top", fill="both")
       labelframe1 = LabelFrame(createFrame,text="Customer",bg="#f5f3f2",font=("arial",15))
@@ -1511,9 +1512,10 @@ def add_customer():
 
       labelframe8 = LabelFrame(labelframe1,text="Customer Type",bg="#f5f3f2")
       labelframe8.place(x=5,y=460,width=420,height=100)
-      R1=Radiobutton(labelframe8,text=" Client ",variable=radio,value=1,bg="#f5f3f2").place(x=5,y=15)
-      R2=Radiobutton(labelframe8,text=" Vendor ",variable=radio,value=2,bg="#f5f3f2").place(x=150,y=15)
-      R3=Radiobutton(labelframe8,text=" Both(client/vendor)",variable=radio,value=3,bg="#f5f3f2").place(x=250,y=15)
+      radio=StringVar()
+      R1=Radiobutton(labelframe8,text=" Client ",variable=radio,value="Client",bg="#f5f3f2").place(x=5,y=15)
+      R2=Radiobutton(labelframe8,text=" Vendor ",variable=radio,value="Vendor",bg="#f5f3f2").place(x=150,y=15)
+      R3=Radiobutton(labelframe8,text=" Both(client/vendor)",variable=radio,value="Both(client/vendor)",bg="#f5f3f2").place(x=250,y=15)
       
 
       labelframe9 = LabelFrame(labelframe1,text="Notes",bg="#f5f3f2")
@@ -1546,11 +1548,12 @@ def reg_1():# Storing values into db (user)contp,cemail,ctel,cfax,cmob,scontp,sc
   shipcpfax = sfax.get()
   country= cntry.get()
   city = cty.get()
+  customertype = radio.get()
   notes=nts.get()
   status= checkvar1.get()
   taxexempt= checkvar2.get()   
-  sql='INSERT INTO customer (customerid,businessname,businessaddress,category,status,shipname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,country,city,notes,discount,specifictax1) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' #adding values into db
-  val=(customerid,businessname,businessaddress,category,status,shipname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,country,city,notes,discount,specifictax1)
+  sql='INSERT INTO customer (customerid,businessname,businessaddress,category,status,shipname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,country,city,notes,discount,specifictax1,customertype) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' #adding values into db
+  val=(customerid,businessname,businessaddress,category,status,shipname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,country,city,notes,discount,specifictax1,customertype)
   fbcursor.execute(sql,val)
   fbilldb.commit()
   for record in customertree.get_children():
@@ -1585,7 +1588,7 @@ def edit_customer():
 
     def update_customer():# Storing values into db (user)
        
-      itemid = customertree.item(customertree.focus())["values"][0]
+      itemid = customertree.item(customertree.focus())["values"][1]
       customerid = b1.get()
       category = ca.get()
       businessname = b5.get()
@@ -1613,22 +1616,84 @@ def edit_customer():
       # sql='UPDATE Customer set category=%s,=%s,address=%s,shiptoname=%s,customer=%s,shipaddress=%s,contactperson=%s,cpemail=%s,cptelno=%s,cpfax=%s,cpmobileforsms=%s,shipcontactperson=%s,shipcpemail=%s,shipcptelno=%s,shipcpfax=%s,taxexempt=%s,specifictax1=%s,discount=%s,country=%s,city=%s where customerid=%s'
       # val=(category,businessname,address,shiptoname,customer,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city,29)
       
-      # sql='UPDATE Customer set category=%s where customerid=%s'
-      # val=(category,1)
-      # sql='UPDATE Customer set businessname=%s where customerid=%s'
-      # val=(businessname,1)
+      sql='UPDATE Customer set category=%s where customerid=%s'
+      val=(category,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set businessname=%s where customerid=%s'
+      val=(businessname,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set businessaddress=%s where customerid=%s'
+      val=(address,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
       sql='UPDATE Customer set shipname=%s where customerid=%s'
-      val=(shiptoname,3)
-      # sql='UPDATE Customer set specifictax1=%s where customerid=%s'
-      # val=(specifictax1,29)
-      # sql='UPDATE Customer set discount=%s where customerid=%s'
-      # val=(discount,29)
-      # sql='UPDATE Customer set country=%s where customerid=%s'
-      # val=(country,29)
-      # sql='UPDATE Customer set city=%s where customerid=%s'
-      # val=(city,29)
-      # sql='UPDATE Customer set notes=%s where customerid=%s'
-      # val=(notes,29)
+      val=(shiptoname,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set shipaddress=%s where customerid=%s'
+      val=(shipaddress,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set contactperson=%s where customerid=%s'
+      val=(contactperson,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set cpemail=%s where customerid=%s'
+      val=(cpemail,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set cptelno=%s where customerid=%s'
+      val=(cptelno,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set cpfax=%s where customerid=%s'
+      val=(cpfax,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set cpmobileforsms=%s where customerid=%s'
+      val=(cpmobileforsms,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set shipcontactperson=%s where customerid=%s'
+      val=(shipcontactperson,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set shipcpemail=%s where customerid=%s'
+      val=(shipcpemail,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set shipcptelno=%s where customerid=%s'
+      val=(shipcptelno,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set shipcpfax=%s where customerid=%s'
+      val=(shipcpfax,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set taxexempt=%s where customerid=%s'
+      val=(taxexempt,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set specifictax1=%s where customerid=%s'
+      val=(specifictax1,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set discount=%s where customerid=%s'
+      val=(discount,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set country=%s where customerid=%s'
+      val=(country,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set city=%s where customerid=%s'
+      val=(city,itemid)
+      fbcursor.execute(sql,val)
+      fbilldb.commit()
+      sql='UPDATE Customer set notes=%s where customerid=%s'
+      val=(notes,itemid)
       fbcursor.execute(sql,val)
       fbilldb.commit()
       # messagebox.showinfo('Update Successfull','Update Successfull')
@@ -1664,10 +1729,20 @@ def edit_customer():
     b1.place(x=120,y=7,width=200)
     b2.place(x=390,y=7,width=220)
     checkvar1 = IntVar()
-    chkbtn1 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 0, offvalue = 1)
+    chkbtn2 = Checkbutton(Labelframe1, text = "Active", variable = checkvar1, onvalue = 1, offvalue = 0)
+    
+    
+
     # chkbtn1.delete(0,'end')
     # chkbtn1.insert(0, psdata[3])
-    chkbtn1.place(x=670,y=6)
+    
+    chkbtn2.place(x=670,y=6)
+    act = psdata[3]
+    print(act,)
+    if act == '1':
+      chkbtn2.select()
+    else:
+      chkbtn2.deselect()
     Labelframe2=LabelFrame(Labelframe1,text="Invoice to (appears on invoice)")
     Labelframe2.place(x=10,y=35,width=340,height=125)
     a1=Label(Labelframe2,text="Business Name:",fg="Blue").place(x=10,y=10)
@@ -1767,6 +1842,13 @@ def edit_customer():
     Labelframe6.place(x=10,y=317,width=340,height=80)
     checkvar1 = IntVar()
     chkbtn1 = Checkbutton(Labelframe6, text = "Tax Exempt", variable = checkvar1, onvalue = 1, offvalue = 0, font=("arial", 8))
+  
+    act = psdata[17]
+    print(act,)
+    if act == '1':
+      chkbtn1.select()
+    else:
+      chkbtn1.deselect()
     chkbtn1.place(x=10,y=6)
     a11=Label(Labelframe6,text="Specific Tax1%:").place(x=150,y=7)
     a3label=Label(Labelframe6,text="Discount%:").place(x=10,y=30)
@@ -2456,17 +2538,37 @@ def import_customer():
 #export_customer
 
 def export_customer():
-    name = askopenfilename(filetypes=[('Excel', ('*.xls', '*.xslm', '*.xlsx')),('CSV', '*.csv',)])
-    if name:
-        if name.endswith('.csv'):
-            df = pd.read_csv(name)
-        else:
-            df = pd.read_excel(name)
+ 
+    cols = ["customerid","companyid ","category","status","businessname","businessaddress","shipname","shipaddress","contactperson","cpemail","cptelno","cpfax","cpmobileforsms","shipcontactperson","shipcpemail","shipcptelno","shipcpfax","taxexempt","specifictax1","discount","country","city","customertype","notes"] # Your column headings here
+    path = filedialog.asksaveasfilename(initialdir=os.getcwd,title="Save File",filetypes=[('CSV', '.csv',), ('Excel', ('.xls', '.xslm', '.xlsx'))])
+    excel_name = 'newfile.xlsx'
+    lst = []
+    with open(path, "w", newline='') as myfile:
+        csvwriter = csv.writer(myfile, delimiter=',')
+        sql = 'select * from Customer'
+        fbcursor.execute(sql)
+        pansdata = fbcursor.fetchall()
+        print (pansdata)
+        for row_id in pansdata:
+            row = row_id
+            lst.append(row)
+        lst = list(map(list,lst))
+        lst.insert(0,cols)
+        for row in lst:
+            csvwriter.writerow(row)
 
-            filename = name
+    writer = pd.ExcelWriter(excel_name)
+    df = pd.read_csv(path)
+    df.to_excel(writer,'sheetname')
+    writer.save()
 
            
             
+
+
+
+
+
 
 
 
@@ -2478,10 +2580,6 @@ def search_customer():
           print(customertree.item(child)['values'])
           selections.append(child)
   customertree.selection_set(selections)
-
-
-
-
 
 
 
@@ -2695,6 +2793,19 @@ tree1["columns"]=("1")
 tree1["show"]='headings'
 tree1.column("1",width=254,anchor='c')
 tree1.heading("1",text="View filter by category")
+def catg(event):
+  selected_indices = listbox.curselection()
+  catfilter = ",".join([listbox.get(i) for i in selected_indices])
+  sql = 'select * from Customer'
+  fbcursor.execute(sql)
+  dt1 = fbcursor.fetchall()
+  if catfilter == "View all records":
+    for record in customertree.get_children():
+      customertree.delete(record)
+    countp = 0
+    for i in dt1:
+      customertree.insert(parent='', index='end', iid=i, text='hello', values=('', i[0], i[2], i[4], i[8], i[10], i[12], i[22]))
+      countp += 1
 listbox = Listbox(tab7,height =8,  
                       width = 29,  
                       bg = "white",
@@ -2707,6 +2818,7 @@ listbox.insert(2, "  View only Client Type")
 listbox.insert(3, "  View only Vendor Type")
 listbox.insert(4, "  Default")
 listbox.place(x=1099,y=120,height=545,width=254)
+listbox.bind('<<ListboxSelect>>', catg)
 
 
 #--------------------TAB-4  RECURRING-ASHBY---------------------
@@ -8926,7 +9038,7 @@ mydb = mysql.connector.connect(host='localhost', user='root', password='', port=
 mycursor = mydb.cursor()
 sql = 'select * from Productservice'
 mycursor.execute(sql)
-pandsdata = mycursor.fetchall()
+pansdata = mycursor.fetchall()
 
 treeproducts=ttk.Treeview(tab8,selectmode='browse')
 treeproducts.place(x=8,y=100,height=580)
@@ -8954,7 +9066,7 @@ treeproducts.heading("7",text="Stock")
 treeproducts.heading("8",text="Location/warehouse")
 treeproducts.heading("9",text="Image")
 countp = 0
-for i in pandsdata:
+for i in pansdata:
   treeproducts.insert(parent='', index='end', iid=countp, text='hello', values=('', i[0], i[2], '', i[4], i[7], i[13], i[15]))
   countp += 1
 treeproducts.place(height=580, width=1070, x=10, y=101)
