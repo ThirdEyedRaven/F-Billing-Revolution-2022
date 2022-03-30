@@ -1384,10 +1384,19 @@ def add_customer():
       createFrame.pack(side="top", fill="both")
       labelframe1 = LabelFrame(createFrame,text="Customer",bg="#f5f3f2",font=("arial",15))
       labelframe1.place(x=10,y=5,width=910,height=600)
+
+      fbcursor.execute("SELECT * FROM Customer ORDER BY customerid DESC LIMIT 1")
+      qury = fbcursor.fetchone()
+      
       text1=Label(labelframe1, text="Customer ID:",bg="#f5f3f2",fg="blue").place(x=5 ,y=10)
       cuid=Entry(labelframe1,width=25)
       cuid.place(x=150,y=10)
-      
+      if not qury== None:
+        id00=qury[0]+1
+      else:
+        id00=1
+      cuid.insert(0, id00)
+
       text2=Label(labelframe1, text="Category:",bg="#f5f3f2").place(x=390 ,y=10)
       ca=ttk.Combobox(labelframe1,width=25,value="Default")
       ca.place(x=460 ,y=10)
@@ -1403,14 +1412,33 @@ def add_customer():
       address = Entry(labelframe2,width=28)
       address.place(x=130,y=40,height=80)
       
-      btn1=Button(labelframe1,width=3,height=2,compound = LEFT,text=">>").place(x=440, y=90)
+
+      # itemid = customertree.item(customertree.focus())["values"][1]
+      # sql = "select * from Customer where customerid = %s"
+      # val = (itemid, )
+      # fbcursor.execute(sql, val)
+      # global osdata
+      # osdata = fbcursor.fetchone()
+
+      # def xchng1():
+      #   shpdlt=spt1.get(osdata[17])
+      #   bname.delete(0,END)
+      #   bname.insert(0,slctcstr[4])
+      #   spaddress.delete('1.0',END)
+      #   spaddress .insert('1.0',slctcstr[5])
+      def btn56():
+       tosp=spname.get()
+       saddres=address.get()
+       bname.insert(0, tosp)
+       spaddress.insert(0, saddres)
+      btn1=Button(labelframe1,width=3,height=2,compound = LEFT,text=">>", command=btn56).place(x=440, y=90)
 
       labelframe3 = LabelFrame(labelframe1,text="Ship to (appears on invoices)",bg="#f5f3f2")
       labelframe3.place(x=480,y=40,width=420,height=150)
       name = Label(labelframe3, text="Business name:",bg="#f5f3f2").place(x=5,y=5)
       bname = Entry(labelframe3,width=28)
       bname.place(x=130,y=5)
-      addr = Label(labelframe3, text="AddSress:",bg="#f5f3f2").place(x=5,y=40)
+      addr = Label(labelframe3, text="Address:",bg="#f5f3f2").place(x=5,y=40)
       spaddress = Entry(labelframe3,width=28)
       spaddress.place(x=130,y=40,height=80)
       
@@ -1432,7 +1460,18 @@ def add_customer():
       cnsms = Entry(labelframe4,width=15)
       cnsms.place(x=248,y=95)      
 
-      btn1=Button(labelframe1,width=3,height=2,compound = LEFT,text=">>").place(x=440, y=250)
+
+
+      def btn57():
+       cprsn1=cprsn.get()
+       cemail1=cemail.get()
+       no=ctno.get()
+       fx=cfax.get()
+       sprsn.insert(0, cprsn1)
+       semail.insert(0, cemail1)
+       stno.insert(0, no)
+       sfax.insert(0,fx)
+      btn1=Button(labelframe1,width=3,height=2,compound = LEFT,text=">>", command=btn57).place(x=440, y=250)
 
       
       labelframe5 = LabelFrame(labelframe1,text="Ship to contact",bg="#f5f3f2")
@@ -1463,7 +1502,8 @@ def add_customer():
       labelframe7 = LabelFrame(labelframe1,text="Contact",bg="#f5f3f2")
       labelframe7.place(x=480,y=330,width=420,height=100)
       cntry= Label(labelframe7, text="country:",bg="#f5f3f2").place(x=5,y=5)
-      cntry = Entry(labelframe7,width=28)
+      cntry = ttk.Combobox(labelframe7,width=28)
+      cntry["values"]=("India","America","Sri Lanka")
       cntry.place(x=130,y=5)
       cty = Label(labelframe7, text="City:",bg="#f5f3f2").place(x=5,y=35)
       cty = Entry(labelframe7,width=28)
@@ -1543,7 +1583,8 @@ def edit_customer():
     psdata = fbcursor.fetchone()
 
 
-    def update_customer():# Storing values into db (user) 
+    def update_customer():# Storing values into db (user)
+       
       itemid = customertree.item(customertree.focus())["values"][0]
       customerid = b1.get()
       category = ca.get()
@@ -1565,11 +1606,30 @@ def edit_customer():
       discount = a12.get()
       country = c.get()
       city = a14.get()
-      print ("hello")
-      print (customerid,category,businessname,address,shiptoname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city)
-      sql='UPDATE Customer set category=%s,businessname=%s,address=%s,shiptoname=%s,customer=%s,shipaddress=%s,contactperson=%s,cpemail=%s,cptelno=%s,cpfax=%s,cpmobileforsms=%s,shipcontactperson=%s,shipcpemail=%s,shipcptelno=%s,shipcpfax=%s,taxexempt=%s,specifictax1=%s,discount=%s,country=%s,city=%s where customerid=%s'
-      val=(category,businessname,address,shiptoname,customer,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city,itemid)
-      fbcursor.execute(sql,val,)
+      notes = b12.get()
+      # print ("hello")
+      # print (customerid,category,businessname,address,shiptoname,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city)
+      # import pdb;pdb.set_trace()
+      # sql='UPDATE Customer set category=%s,=%s,address=%s,shiptoname=%s,customer=%s,shipaddress=%s,contactperson=%s,cpemail=%s,cptelno=%s,cpfax=%s,cpmobileforsms=%s,shipcontactperson=%s,shipcpemail=%s,shipcptelno=%s,shipcpfax=%s,taxexempt=%s,specifictax1=%s,discount=%s,country=%s,city=%s where customerid=%s'
+      # val=(category,businessname,address,shiptoname,customer,shipaddress,contactperson,cpemail,cptelno,cpfax,cpmobileforsms,shipcontactperson,shipcpemail,shipcptelno,shipcpfax,taxexempt,specifictax1,discount,country,city,29)
+      
+      # sql='UPDATE Customer set category=%s where customerid=%s'
+      # val=(category,1)
+      # sql='UPDATE Customer set businessname=%s where customerid=%s'
+      # val=(businessname,1)
+      sql='UPDATE Customer set shipname=%s where customerid=%s'
+      val=(shiptoname,3)
+      # sql='UPDATE Customer set specifictax1=%s where customerid=%s'
+      # val=(specifictax1,29)
+      # sql='UPDATE Customer set discount=%s where customerid=%s'
+      # val=(discount,29)
+      # sql='UPDATE Customer set country=%s where customerid=%s'
+      # val=(country,29)
+      # sql='UPDATE Customer set city=%s where customerid=%s'
+      # val=(city,29)
+      # sql='UPDATE Customer set notes=%s where customerid=%s'
+      # val=(notes,29)
+      fbcursor.execute(sql,val)
       fbilldb.commit()
       # messagebox.showinfo('Update Successfull','Update Successfull')
   
@@ -1619,8 +1679,15 @@ def edit_customer():
     b14=Entry(Labelframe2)
     b14.place(x=110,y=35,width=210,height=63)
     b14.delete(0,'end')
-    b14.insert(0, psdata[5])  
-    btn110=Button(Labelframe1,width=3,height=2,compound = LEFT,text=">>").place(x=359,y=85,height=20)
+    b14.insert(0, psdata[5]) 
+
+
+    def btn58():
+        b15.delete(0,END)
+        b15.insert(0,psdata[4])
+        a23.delete(0,END)
+        a23.insert(0, psdata[5]) 
+    btn110=Button(Labelframe1,width=3,height=2,compound = LEFT,text=">>", command=btn58).place(x=359,y=85,height=20)
     Labelframe3=LabelFrame(Labelframe1,text="Ship to (appears on invoice)")
     Labelframe3.place(x=400,y=35,width=340,height=125)
     a11=Label(Labelframe3,text="Ship to Name:").place(x=10,y=10)
@@ -1662,7 +1729,18 @@ def edit_customer():
     a51.place(x=215,y=85,width=105)
     a51.delete(0,'end')
     a51.insert(0, psdata[12])
-    btn111=Button(Labelframe1,width=3,height=2,compound = LEFT,text=">>").place(x=359,y=220,height=20)
+
+
+    def btn59():
+        b13.delete(0,END)
+        b13.insert(0,psdata[8])
+        a22.delete(0,END)
+        a22.insert(0, psdata[9])
+        a31.delete(0,END)
+        a31.insert(0,psdata[10])
+        a41.delete(0,END)
+        a41.insert(0,psdata[11]) 
+    btn111=Button(Labelframe1,width=3,height=2,compound = LEFT,text=">>", command=btn59).place(x=359,y=220,height=20)
     Labelframe5=LabelFrame(Labelframe1,text="Ship To Contact")
     Labelframe5.place(x=400,y=170,width=340,height=108)
     a11=Label(Labelframe5,text="Contact Person:").place(x=10,y=10)
@@ -1715,7 +1793,9 @@ def edit_customer():
     b11=ttk.Combobox(Labelframe8,textvariable=c)
     b11.place(x=110,y=5,width=210)
     b11['values'] = ('India','America')    
-    b11.place(x=110,y=5) 
+    b11.place(x=110,y=5)
+    b11.delete(0,'end')
+    b11.insert(0, psdata[20]) 
     a14=Entry(Labelframe8)
     a14.place(x=110,y=30,width=210)
     a14.delete(0,'end')
@@ -1726,7 +1806,10 @@ def edit_customer():
         scrollbar.place(x=300,y=10)
         b12=Entry(Labelframe9,yscrollcommand=scrollbar.set).place(x=10,y=10,width=290,height=70)
         yscrollcommand.config(command=b12.yview)'''
-    b12=Entry(Labelframe9).place(x=20,y=10,width=295,height=70)
+    b12=Entry(Labelframe9)
+    b12.place(x=20,y=10,width=295,height=70)
+    b12.delete(0,'end')
+    b12.insert(0, psdata[23])
     scrollbar = Scrollbar(Labelframe9)
     scrollbar.place(x=295,y=10)
     btn1=Button(edit_customer,width=50,compound = LEFT,image=tick ,text="  OK",command=update_customer).place(x=20, y=545)
@@ -2050,6 +2133,38 @@ def emailinvoice_customer():
   MySMTP_rbtn.place(x=10, y=40)
   em_ser_conbtn=Button(account_Frame, text="Test E-mail Server Connection")
   em_ser_conbtn.place(x=710, y=110)
+
+
+
+# import smtplib, ssl
+
+# port = 587  # For starttls
+# smtp_server = "smtp.gmail.com"
+# sender_email = "my@gmail.com"
+# receiver_email = "your@gmail.com"
+# password = input("Type your password and press enter:")
+# message = """\
+# Subject: Hi there
+
+# This message is sent from Python."""
+
+# context = ssl.create_default_context()
+# with smtplib.SMTP(smtp_server, port) as server:
+#     server.ehlo()  # Can be omitted
+#     server.starttls(context=context)
+#     server.ehlo()  # Can be omitted
+#     server.login(sender_email, password)
+#     server.sendmail(sender_email, receiver_email, message)
+
+
+
+
+
+
+
+
+
+
 
 
 
